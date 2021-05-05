@@ -1,0 +1,6 @@
+{
+    "exampleFeature_fetchTemperature": "Sprawdź temperaturę",
+    "exampleFeature_hello": "Witaj!",
+    "exampleFeature_temperatureFetchedFailed": "Wystąpił błąd",
+    "exampleFeature_temperaturePrefix": "Temperatura: : "
+}

@@ -1,0 +1,6 @@
+{
+    "exampleFeature_fetchTemperature": "Fetch Temperature",
+    "exampleFeature_hello": "Hello!",
+    "exampleFeature_temperatureFetchedFailed": "fetch failed",
+    "exampleFeature_temperaturePrefix": "Temperature: "
+}
