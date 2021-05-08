@@ -33,24 +33,31 @@ DEBUG = env("DEBUG", default=False)
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(",")
 
 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
     "rest_framework",
-    "smarthome",
     "djoser",
     "users",
+    "smarthome",
+    "corsheaders",
+
 ]
 
 AUTH_USER_MODEL = "users.User"
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -152,7 +159,6 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
-
 DJOSER = {
     "SEND_ACTIVATION_EMAIL": False,
     "LOGIN_FIELD": "email",
@@ -169,3 +175,7 @@ SIMPLE_JWT = {
     "SIGNING_KEY": env("REFRESH_TOKEN_SECRET"),
     "AUTH_HEADER_TYPES": ("Bearer", "Token"),
 }
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+)
