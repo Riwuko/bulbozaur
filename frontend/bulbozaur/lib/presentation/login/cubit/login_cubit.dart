@@ -13,7 +13,5 @@ class LoginCubit extends BaseCubit<LoginState> {
   @override
   Future<void> init() async {}
 
-  Future<void> didTapContinueButton(String login, String password) async {
-    emit(LoginState.loginSuccess());
-  }
+  Future<void> didTapContinueButton(String login, String password) async {}
 }
