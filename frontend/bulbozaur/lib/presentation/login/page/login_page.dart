@@ -30,26 +30,38 @@ class _BodyState extends State<_Body> {
       MediaQuery.of(context).size.width * 0.8;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => BlocListener<LoginCubit, LoginState>(
+        listener: (context, state) => state.maybeWhen(
+            loginSuccess: () => context.navigator.push(SingleHomePageRoute()),
+            failure: () => Container(
+                  child: Text("its some problems"),
+                ),
+            orElse: () {
+              print("error");
+            }),
+        child: _buildContent(),
+      );
+  Widget _buildContent() => Scaffold(
         body: Container(
+          alignment: Alignment.bottomCenter,
           child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.only(
-                            right: 20.0, bottom: 50.0, top: 80),
-                        child: SvgPicture.asset(AppImages.svgLogoOfTheApp)),
-                    SvgPicture.asset(AppImages.svgNameOfTheApp),
-                  ],
+                Container(
+                  margin: const EdgeInsets.only(right: 20.0, bottom: 100.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(AppImages.svgLogoOfTheApp),
+                      SvgPicture.asset(AppImages.svgNameOfTheApp),
+                    ],
+                  ),
                 ),
                 Container(
+                  margin: const EdgeInsets.symmetric(vertical: 40.0),
                   width: _theWidthOfTextField(context),
                   child: TextFormField(
                     controller: _loginTextController,
@@ -75,11 +87,12 @@ class _BodyState extends State<_Body> {
                           hintText: "Password",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: AppColors.white),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
                           ),
                           fillColor: AppColors.textFieldColor)),
                 ),
                 Container(
+                  margin: const EdgeInsets.symmetric(vertical: 60.0),
                   height: 60,
                   width: _theWidthOfTextField(context),
                   child: TextButton(
@@ -102,6 +115,7 @@ class _BodyState extends State<_Body> {
           ),
         ),
       );
+
   void _didTapSingUpButton(
           BuildContext context, String login, String password) =>
       context.read<LoginCubit>().didTapContinueButton(login, password);

@@ -23,6 +23,10 @@ class _$LoginStateTearOff {
   _HomeStateFailure failure() {
     return const _HomeStateFailure();
   }
+
+  _HomeStateLoginSuccess loginSuccess() {
+    return const _HomeStateLoginSuccess();
+  }
 }
 
 /// @nodoc
@@ -34,12 +38,14 @@ mixin _$LoginState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() failure,
+    required TResult Function() loginSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? failure,
+    TResult Function()? loginSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,12 +53,14 @@ mixin _$LoginState {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) initial,
     required TResult Function(_HomeStateFailure value) failure,
+    required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeStateInitial value)? initial,
     TResult Function(_HomeStateFailure value)? failure,
+    TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,6 +124,7 @@ class _$_HomeStateInitial implements _HomeStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() failure,
+    required TResult Function() loginSuccess,
   }) {
     return initial();
   }
@@ -125,6 +134,7 @@ class _$_HomeStateInitial implements _HomeStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? failure,
+    TResult Function()? loginSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -138,6 +148,7 @@ class _$_HomeStateInitial implements _HomeStateInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) initial,
     required TResult Function(_HomeStateFailure value) failure,
+    required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
   }) {
     return initial(this);
   }
@@ -147,6 +158,7 @@ class _$_HomeStateInitial implements _HomeStateInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeStateInitial value)? initial,
     TResult Function(_HomeStateFailure value)? failure,
+    TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -202,6 +214,7 @@ class _$_HomeStateFailure implements _HomeStateFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() failure,
+    required TResult Function() loginSuccess,
   }) {
     return failure();
   }
@@ -211,6 +224,7 @@ class _$_HomeStateFailure implements _HomeStateFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? failure,
+    TResult Function()? loginSuccess,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -224,6 +238,7 @@ class _$_HomeStateFailure implements _HomeStateFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_HomeStateInitial value) initial,
     required TResult Function(_HomeStateFailure value) failure,
+    required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
   }) {
     return failure(this);
   }
@@ -233,6 +248,7 @@ class _$_HomeStateFailure implements _HomeStateFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_HomeStateInitial value)? initial,
     TResult Function(_HomeStateFailure value)? failure,
+    TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -244,4 +260,96 @@ class _$_HomeStateFailure implements _HomeStateFailure {
 
 abstract class _HomeStateFailure implements LoginState {
   const factory _HomeStateFailure() = _$_HomeStateFailure;
+}
+
+/// @nodoc
+abstract class _$HomeStateLoginSuccessCopyWith<$Res> {
+  factory _$HomeStateLoginSuccessCopyWith(_HomeStateLoginSuccess value,
+          $Res Function(_HomeStateLoginSuccess) then) =
+      __$HomeStateLoginSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$HomeStateLoginSuccessCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res>
+    implements _$HomeStateLoginSuccessCopyWith<$Res> {
+  __$HomeStateLoginSuccessCopyWithImpl(_HomeStateLoginSuccess _value,
+      $Res Function(_HomeStateLoginSuccess) _then)
+      : super(_value, (v) => _then(v as _HomeStateLoginSuccess));
+
+  @override
+  _HomeStateLoginSuccess get _value => super._value as _HomeStateLoginSuccess;
+}
+
+/// @nodoc
+
+@Implements(LoginStateLoginSuccess)
+class _$_HomeStateLoginSuccess implements _HomeStateLoginSuccess {
+  const _$_HomeStateLoginSuccess();
+
+  @override
+  String toString() {
+    return 'LoginState.loginSuccess()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _HomeStateLoginSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() failure,
+    required TResult Function() loginSuccess,
+  }) {
+    return loginSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? failure,
+    TResult Function()? loginSuccess,
+    required TResult orElse(),
+  }) {
+    if (loginSuccess != null) {
+      return loginSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeStateInitial value) initial,
+    required TResult Function(_HomeStateFailure value) failure,
+    required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
+  }) {
+    return loginSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeStateInitial value)? initial,
+    TResult Function(_HomeStateFailure value)? failure,
+    TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
+    required TResult orElse(),
+  }) {
+    if (loginSuccess != null) {
+      return loginSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HomeStateLoginSuccess
+    implements LoginState, LoginStateLoginSuccess {
+  const factory _HomeStateLoginSuccess() = _$_HomeStateLoginSuccess;
 }
