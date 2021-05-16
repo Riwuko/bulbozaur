@@ -24,4 +24,22 @@ class TextStyles {
     fontSize: FontSizes.button,
     fontWeight: FontWeight.w500,
   );
+
+  static const singleHomeManual = TextStyle(
+    color: AppColors.black,
+    fontSize: FontSizes.mediumSize,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const singleHomeNameOfRoom = TextStyle(
+    color: AppColors.black,
+    fontSize: FontSizes.xMediumSize,
+    fontWeight: FontWeight.w300,
+  );
+
+  static const menuTitlePage = TextStyle(
+    color: AppColors.black,
+    fontSize: 36,
+    fontWeight: FontWeight.w900,
+  );
 }

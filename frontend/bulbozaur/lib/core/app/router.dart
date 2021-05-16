@@ -16,6 +16,7 @@ export 'router.gr.dart';
 class $CodigeeRouter {}
 
 extension RouterExtension on BuildContext {
+  static final CodigeeRouter _instance = CodigeeRouter();
   StackRouter get navigator => AutoRouter.of(this);
-  CodigeeRouter get router => CodigeeRouter();
+  CodigeeRouter get router => _instance;
 }

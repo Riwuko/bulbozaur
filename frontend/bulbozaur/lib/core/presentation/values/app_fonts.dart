@@ -14,6 +14,8 @@ class FontSizes {
 
   static const double body1 = 24;
   static const double button = 24;
+  static const double mediumSize = 18;
+  static const double xMediumSize = 16;
   static const double subTitle1 = 32;
   static const double headline1 = 48;
 }

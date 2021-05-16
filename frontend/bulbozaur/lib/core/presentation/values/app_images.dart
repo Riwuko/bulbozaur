@@ -17,15 +17,12 @@ part of 'values.dart';
 ///  app_menu.svg
 ///
 abstract class AppImages {
+  static final _pngPath = 'assets/images/png';
+  static final _svgPath = 'assets/images/svg';
 
-    static final _pngPath = 'assets/images/png';
-    static final _svgPath = 'assets/images/svg';
+  static final svgLogoOfTheApp = '$_svgPath/logo.svg';
+  static final svgNameOfTheApp = '$_svgPath/bulb-ozaur.svg';
+  static final svgBulbLogoCircle = '$_svgPath/app_bulb_circle.svg';
 
-    static final svgLogoOfTheApp='$_svgPath/logo.svg';
-    static final svgNameOfTheApp='$_svgPath/bulb-ozaur.svg';
-
-
-
-
-
+  static final pngHome1 = '$_pngPath/app_home1.png';
 }

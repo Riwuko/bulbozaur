@@ -27,6 +27,10 @@ class _$LoginStateTearOff {
   _HomeStateLoginSuccess loginSuccess() {
     return const _HomeStateLoginSuccess();
   }
+
+  _HomeStateInvalidAdress invalidAdress() {
+    return const _HomeStateInvalidAdress();
+  }
 }
 
 /// @nodoc
@@ -39,6 +43,7 @@ mixin _$LoginState {
     required TResult Function() initial,
     required TResult Function() failure,
     required TResult Function() loginSuccess,
+    required TResult Function() invalidAdress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,6 +51,7 @@ mixin _$LoginState {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? loginSuccess,
+    TResult Function()? invalidAdress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +60,7 @@ mixin _$LoginState {
     required TResult Function(_HomeStateInitial value) initial,
     required TResult Function(_HomeStateFailure value) failure,
     required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
+    required TResult Function(_HomeStateInvalidAdress value) invalidAdress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +68,7 @@ mixin _$LoginState {
     TResult Function(_HomeStateInitial value)? initial,
     TResult Function(_HomeStateFailure value)? failure,
     TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
+    TResult Function(_HomeStateInvalidAdress value)? invalidAdress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,6 +133,7 @@ class _$_HomeStateInitial implements _HomeStateInitial {
     required TResult Function() initial,
     required TResult Function() failure,
     required TResult Function() loginSuccess,
+    required TResult Function() invalidAdress,
   }) {
     return initial();
   }
@@ -135,6 +144,7 @@ class _$_HomeStateInitial implements _HomeStateInitial {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? loginSuccess,
+    TResult Function()? invalidAdress,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -149,6 +159,7 @@ class _$_HomeStateInitial implements _HomeStateInitial {
     required TResult Function(_HomeStateInitial value) initial,
     required TResult Function(_HomeStateFailure value) failure,
     required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
+    required TResult Function(_HomeStateInvalidAdress value) invalidAdress,
   }) {
     return initial(this);
   }
@@ -159,6 +170,7 @@ class _$_HomeStateInitial implements _HomeStateInitial {
     TResult Function(_HomeStateInitial value)? initial,
     TResult Function(_HomeStateFailure value)? failure,
     TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
+    TResult Function(_HomeStateInvalidAdress value)? invalidAdress,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -215,6 +227,7 @@ class _$_HomeStateFailure implements _HomeStateFailure {
     required TResult Function() initial,
     required TResult Function() failure,
     required TResult Function() loginSuccess,
+    required TResult Function() invalidAdress,
   }) {
     return failure();
   }
@@ -225,6 +238,7 @@ class _$_HomeStateFailure implements _HomeStateFailure {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? loginSuccess,
+    TResult Function()? invalidAdress,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -239,6 +253,7 @@ class _$_HomeStateFailure implements _HomeStateFailure {
     required TResult Function(_HomeStateInitial value) initial,
     required TResult Function(_HomeStateFailure value) failure,
     required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
+    required TResult Function(_HomeStateInvalidAdress value) invalidAdress,
   }) {
     return failure(this);
   }
@@ -249,6 +264,7 @@ class _$_HomeStateFailure implements _HomeStateFailure {
     TResult Function(_HomeStateInitial value)? initial,
     TResult Function(_HomeStateFailure value)? failure,
     TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
+    TResult Function(_HomeStateInvalidAdress value)? invalidAdress,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -306,6 +322,7 @@ class _$_HomeStateLoginSuccess implements _HomeStateLoginSuccess {
     required TResult Function() initial,
     required TResult Function() failure,
     required TResult Function() loginSuccess,
+    required TResult Function() invalidAdress,
   }) {
     return loginSuccess();
   }
@@ -316,6 +333,7 @@ class _$_HomeStateLoginSuccess implements _HomeStateLoginSuccess {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? loginSuccess,
+    TResult Function()? invalidAdress,
     required TResult orElse(),
   }) {
     if (loginSuccess != null) {
@@ -330,6 +348,7 @@ class _$_HomeStateLoginSuccess implements _HomeStateLoginSuccess {
     required TResult Function(_HomeStateInitial value) initial,
     required TResult Function(_HomeStateFailure value) failure,
     required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
+    required TResult Function(_HomeStateInvalidAdress value) invalidAdress,
   }) {
     return loginSuccess(this);
   }
@@ -340,6 +359,7 @@ class _$_HomeStateLoginSuccess implements _HomeStateLoginSuccess {
     TResult Function(_HomeStateInitial value)? initial,
     TResult Function(_HomeStateFailure value)? failure,
     TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
+    TResult Function(_HomeStateInvalidAdress value)? invalidAdress,
     required TResult orElse(),
   }) {
     if (loginSuccess != null) {
@@ -352,4 +372,98 @@ class _$_HomeStateLoginSuccess implements _HomeStateLoginSuccess {
 abstract class _HomeStateLoginSuccess
     implements LoginState, LoginStateLoginSuccess {
   const factory _HomeStateLoginSuccess() = _$_HomeStateLoginSuccess;
+}
+
+/// @nodoc
+abstract class _$HomeStateInvalidAdressCopyWith<$Res> {
+  factory _$HomeStateInvalidAdressCopyWith(_HomeStateInvalidAdress value,
+          $Res Function(_HomeStateInvalidAdress) then) =
+      __$HomeStateInvalidAdressCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$HomeStateInvalidAdressCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res>
+    implements _$HomeStateInvalidAdressCopyWith<$Res> {
+  __$HomeStateInvalidAdressCopyWithImpl(_HomeStateInvalidAdress _value,
+      $Res Function(_HomeStateInvalidAdress) _then)
+      : super(_value, (v) => _then(v as _HomeStateInvalidAdress));
+
+  @override
+  _HomeStateInvalidAdress get _value => super._value as _HomeStateInvalidAdress;
+}
+
+/// @nodoc
+
+class _$_HomeStateInvalidAdress implements _HomeStateInvalidAdress {
+  const _$_HomeStateInvalidAdress();
+
+  @override
+  String toString() {
+    return 'LoginState.invalidAdress()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _HomeStateInvalidAdress);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() failure,
+    required TResult Function() loginSuccess,
+    required TResult Function() invalidAdress,
+  }) {
+    return invalidAdress();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? failure,
+    TResult Function()? loginSuccess,
+    TResult Function()? invalidAdress,
+    required TResult orElse(),
+  }) {
+    if (invalidAdress != null) {
+      return invalidAdress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeStateInitial value) initial,
+    required TResult Function(_HomeStateFailure value) failure,
+    required TResult Function(_HomeStateLoginSuccess value) loginSuccess,
+    required TResult Function(_HomeStateInvalidAdress value) invalidAdress,
+  }) {
+    return invalidAdress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeStateInitial value)? initial,
+    TResult Function(_HomeStateFailure value)? failure,
+    TResult Function(_HomeStateLoginSuccess value)? loginSuccess,
+    TResult Function(_HomeStateInvalidAdress value)? invalidAdress,
+    required TResult orElse(),
+  }) {
+    if (invalidAdress != null) {
+      return invalidAdress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HomeStateInvalidAdress implements LoginState {
+  const factory _HomeStateInvalidAdress() = _$_HomeStateInvalidAdress;
 }

@@ -12,4 +12,6 @@ class SingleHomeCubit extends BaseCubit<SingleHomeState> {
 
   @override
   Future<void> init() async {}
+
+  didChangeManualControl(bool isTrue) {}
 }

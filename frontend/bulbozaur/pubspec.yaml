@@ -13,6 +13,10 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  #printing graph
+  draw_graph: ^1.0.0
+
+
   # CHECK NEW LIB'S VERSIONS AT PUB.DEV!
   # Core, code extensions
   dartz: ^0.10.0-nullsafety.1
@@ -60,6 +64,10 @@ dev_dependencies:
 
   # Testing
   mockito: ^5.0.5
+
+    #Network
+  http: ^0.13.3
+
 
 flutter:
   uses-material-design: true

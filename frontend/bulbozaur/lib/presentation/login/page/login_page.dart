@@ -36,6 +36,13 @@ class _BodyState extends State<_Body> {
             failure: () => Container(
                   child: Text("its some problems"),
                 ),
+            invalidAdress: () {
+              final snackBar = SnackBar(
+                  content: Container(
+                child: Text("Incorrect Data, please check email or password"),
+              ));
+              return ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
             orElse: () {
               print("error");
             }),
@@ -65,9 +72,10 @@ class _BodyState extends State<_Body> {
                   width: _theWidthOfTextField(context),
                   child: TextFormField(
                     controller: _loginTextController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         filled: true,
-                        hintText: "Username",
+                        hintText: "E-mail",
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: AppColors.white),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -87,7 +95,7 @@ class _BodyState extends State<_Body> {
                           hintText: "Password",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: AppColors.white),
-                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           fillColor: AppColors.textFieldColor)),
                 ),
