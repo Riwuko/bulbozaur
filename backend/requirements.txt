@@ -6,3 +6,6 @@ djangorestframework_simplejwt
 djoser
 pyyaml
 django-cors-headers
+graphene-django
+PyJWT==1.7.0
+django-graphql-jwt

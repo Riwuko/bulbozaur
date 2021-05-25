@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "users",
     "smarthome",
     "corsheaders",
+    "graphene_django",
 
 ]
 
@@ -177,5 +178,20 @@ SIMPLE_JWT = {
 }
 
 AUTHENTICATION_BACKENDS = (
+    "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 )
+
+GRAPHENE = {
+    "SCHEMA": "config.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
+}
+
+GRAPHQL_JWT = {
+    "JWT_ALLOW_ARGUMENT": True,
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(days=1),
+    "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=365),
+}
