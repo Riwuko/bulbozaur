@@ -67,6 +67,8 @@ dev_dependencies:
 
     #Network
   http: ^0.13.3
+  graphql_flutter: ^5.0.0-beta
+
 
 
 flutter:
