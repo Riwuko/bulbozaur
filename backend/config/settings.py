@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     "smarthome",
     "corsheaders",
     "graphene_django",
-
+    "django_elasticsearch_dsl",
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -195,3 +195,26 @@ GRAPHQL_JWT = {
     "JWT_EXPIRATION_DELTA": datetime.timedelta(days=1),
     "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=365),
 }
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'elasticsearch:9200'
+    },
+}
+
+ELASTICSEARCH_CONNECTION_DEFAULTS = {
+    'hosts': ['localhost'],
+    'timeout': 5,
+}
+
+ELASTICSEARCH_CONNECTION = os.environ.get(
+    "ELASTICSEARCH_CONNECTION",
+    ELASTICSEARCH_CONNECTION_DEFAULTS
+)
+
+if isinstance(ELASTICSEARCH_CONNECTION, str):
+    try:
+        ELASTICSEARCH_CONNECTION = json.loads(ELASTICSEARCH_CONNECTION)
+    except:
+        ELASTICSEARCH_CONNECTION = ELASTICSEARCH_CONNECTION_DEFAULTS
+

@@ -1,8 +1,23 @@
 import graphene
+from graphene import Node
+from collections import defaultdict
+
 from django.shortcuts import get_object_or_404
 from graphene_django import DjangoObjectType
 from graphql_jwt.decorators import login_required
+from graphene_elastic import (
+    ElasticsearchObjectType,
+    ElasticsearchConnectionField,
+)
+from graphene_elastic.filter_backends import (
+    FilteringFilterBackend,
+    SearchFilterBackend,
+    OrderingFilterBackend,
+)
+
+
 from .models import Building, Device, Measurement, MeasuringDevice, Schedule, ControlParameter
+from .documents import MeasurementDocument
 from users.models import User
 
 
@@ -21,15 +36,62 @@ class DeviceType(DjangoObjectType):
         model = Device
 
 
-class MeasurementType(DjangoObjectType):
+class MeasurementType(ElasticsearchObjectType):
     class Meta:
-        model = Measurement
+        document = MeasurementDocument
+        interfaces=(Node,)
+        filter_backends = [
+            FilteringFilterBackend,
+            SearchFilterBackend,
+            OrderingFilterBackend,
 
+        ]
+        filter_fields = {
+            'id': 'id',
+            'measuring_device':{
+                'type': 'object',
+                'properties': {
+                    'id': 'id',
+                    'name':'name',
+                    'building': {
+                        'type': 'object',
+                        'properties': {
+                            'name': 'name',
+                            'id':'id',
+                            'user': {
+                                'type': 'object',
+                                'properties': {
+                                    'id':'id',
+                                    'email':'email',
+                                }
+                            }
+                    },
+                },
+                }
+            }
+        }
+        search_fields = {
+            'id': 'id'
+        }
+        ordering_fields = {
+            'measure_date': 'measure_date',
+            'measure_value': 'measure_value',
+        }
+
+class MeasurementObjectType(graphene.ObjectType):
+    id = graphene.ID()
+    measure_value = graphene.Decimal()
+    measure_date = graphene.DateTime()
 
 class MeasuringDeviceType(DjangoObjectType):
+    last_measurement = graphene.Field(MeasurementObjectType)
+
     class Meta:
         model = MeasuringDevice
-
+    
+    def resolve_last_measurement(self, info):
+        result = self.device_measurements.last()
+        return MeasurementObjectType(id = result.id, measure_value = result.measure_value, measure_date = result.measure_date)
 
 
 class ScheduleType(DjangoObjectType):
@@ -49,8 +111,7 @@ class Query(graphene.ObjectType):
     devices = graphene.List(DeviceType, token=graphene.String(required=True))
     device = graphene.Field(DeviceType, id=graphene.Int(), token=graphene.String(required=True))
 
-    measurements = graphene.List(MeasurementType, token=graphene.String(required=True))
-    measurement = graphene.Field(MeasurementType, id=graphene.Int(), token=graphene.String(required=True))
+    measurements = ElasticsearchConnectionField(MeasurementType)
 
     measuring_devices = graphene.List(MeasuringDeviceType,  token=graphene.String(required=True))
     measuring_device = graphene.Field(MeasuringDeviceType, id=graphene.Int(),  token=graphene.String(required=True))
@@ -86,14 +147,6 @@ class Query(graphene.ObjectType):
     @login_required
     def resolve_measuring_device(root, info, id, **kwargs):
         return get_object_or_404(MeasuringDevice, id=id, building__user=info.context.user)
-
-    @login_required
-    def resolve_measurements(root, info, **kwargs):
-        return Measurement.objects.filter(building__user=info.context.user)
-
-    @login_required
-    def resolve_measurement(root, info, id, **kwargs):
-        return get_object_or_404(Measurement, id=id, building__user=info.context.user)
 
     @login_required
     def resolve_control_parameters(root, info, **kwargs):
