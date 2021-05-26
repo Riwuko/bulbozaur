@@ -22,7 +22,6 @@ class LoginCubit extends BaseCubit<LoginState> {
       (l) => emit(LoginState.failure()),
       (r) => responses = r,
     );
-    print(responses);
     if (responses == true) {
       emit(LoginState.loginSuccess());
     } else {

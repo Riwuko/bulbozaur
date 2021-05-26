@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project_skeleton/core/app/router.dart';
 import 'package:project_skeleton/core/presentation/styles/styles.dart';
 import 'package:project_skeleton/presentation/login/cubit/login_cubit.dart';
 
@@ -32,7 +33,7 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) => BlocListener<LoginCubit, LoginState>(
         listener: (context, state) => state.maybeWhen(
-            loginSuccess: () => context.navigator.push(SingleHomePageRoute()),
+            loginSuccess: () => context.navigator.push(ChooseHomePageRoute()),
             failure: () => Container(
                   child: Text("its some problems"),
                 ),

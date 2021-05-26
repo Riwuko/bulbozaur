@@ -8,24 +8,29 @@ import 'package:project_skeleton/domain/entities/core/graphQl_get_client.dart';
 import 'package:project_skeleton/domain/use_case/core/usecase.dart';
 
 @Injectable()
-class CheckIfLoginIsGood implements UseCases<bool, String, String> {
-  static const String getLogin = r"""
-mutation TokenAuth($email: String!,$password: String!){
-  tokenAuth(email:$email,password:$password){
-    token
-    payload
-    refreshExpiresIn
-  }
+class GetTheHouses extends UseCase<bool, void> {
+  static const String getHouses = r"""
+query Buildings($token:String!)
+{
+buildings(token:$token){
+  id
+  name
+  buildingMeasuringDevices{
+  measuringDeviceDevices{
+    id
+    name
+  }}
 }
-
+}
  """;
 
   @override
-  Future<Either<Failure, bool>> call(String email, String password) async {
+  Future<Either<Failure, bool>> call([noparams]) async {
     final storage = new FlutterSecureStorage();
+    String? token = await storage.read(key: "token");
     final QueryOptions options = QueryOptions(
-      document: gql(getLogin),
-      variables: <String, dynamic>{'email': email, 'password': password},
+      document: gql(getHouses),
+      variables: <String, dynamic>{'token': token},
     );
     final client = getClient();
     final QueryResult result = await client.query(options);
@@ -34,9 +39,6 @@ mutation TokenAuth($email: String!,$password: String!){
       return Left(Failure.invalidParameter());
     } else {
       print(result.data);
-      String token = result.data!['tokenAuth']['token'];
-      await storage.write(key: "token", value: token);
-
       return Right(true);
     }
   }
