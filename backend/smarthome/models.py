@@ -1,4 +1,5 @@
 from django.db import models
+from polymorphic.models import PolymorphicModel
 
 from users.models import User
 
@@ -14,26 +15,24 @@ class Building(models.Model):
         return f"Building: {str(self.id)} | name: {self.name}"
 
 
-class MeasuringDevice(models.Model):
+class Device(PolymorphicModel):
     name = models.CharField(max_length=100, null=False)
     building = models.ForeignKey(
-        Building, related_name="building_measuring_devices", null=True, on_delete=models.SET_NULL
+        Building, related_name="building_devices", null=True, on_delete=models.SET_NULL
     )
+
+class MeasuringDevice(Device):
 
     def __str__(self):
         return f"Measuring device: {str(self.id)} | name: {self.name}"
 
 
-class Device(models.Model):
-    name = models.CharField(max_length=100, null=False)
+class ActuatingDevice(Device):
     state = models.BooleanField(null=False, default=False)
     state_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=None)
-    building = models.ForeignKey(
-        Building, related_name="building_devices", null=True, on_delete=models.SET_NULL
-    )
 
     def __str__(self):
-        return f"Device: {str(self.id)} | name: {self.name}"
+        return f"Actuating device: {str(self.id)} | name: {self.name}"
 
 
 class Schedule(models.Model):
@@ -51,7 +50,7 @@ class Schedule(models.Model):
 
 class ScheduleDeviceState(models.Model):
     device = models.ForeignKey(
-        Device, related_name="schedule_device_states", null=False, on_delete=models.CASCADE
+        ActuatingDevice, related_name="schedule_device_states", null=False, on_delete=models.CASCADE
     )
     state = models.BooleanField(null=False, default=False)
     state_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=None)
@@ -72,12 +71,12 @@ class ScheduleDeviceState(models.Model):
 class Measurement(models.Model):
     measure_date = models.DateTimeField(auto_now=True, null=False)
     measure_value = models.DecimalField(max_digits=10, decimal_places=3, null=True)
-    measuring_device = models.ForeignKey(
-        MeasuringDevice, on_delete=models.CASCADE, related_name="device_measurements"
+    device = models.ForeignKey(
+        Device, on_delete=models.CASCADE, related_name="device_measurements"
     )
 
     def __str__(self):
-        return f"Measurement: {str(self.id)} | measuring device: {self.measuring_device.name} | date: {self.measure_date}"
+        return f"Measurement: {str(self.id)} | device: {self.device.name} | date: {self.measure_date}"
 
 
 class ControlParameter(models.Model):
@@ -91,4 +90,4 @@ class ControlParameter(models.Model):
         )
 
     def __str__(self):
-        return f"{self.building.name} : {self.parameter}"
+        return f"{self.building.name} : {self.light_value}"

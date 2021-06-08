@@ -39,7 +39,6 @@ CORS_ALLOW_CREDENTIALS = True
 # Application definition
 
 INSTALLED_APPS = [
-    
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -49,10 +48,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "djoser",
     "users",
+    "django_filters",
     "smarthome",
     "corsheaders",
     "graphene_django",
     "django_elasticsearch_dsl",
+    'polymorphic',
 ]
 
 AUTH_USER_MODEL = "users.User"

@@ -12,3 +12,5 @@ django-graphql-jwt
 elasticsearch-dsl>=6.0, <7.0
 django-elasticsearch-dsl>=6.0,<7.0
 graphene-elastic==0.7
+django-filter
+django-polymorphic
