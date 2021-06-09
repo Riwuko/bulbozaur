@@ -21,7 +21,7 @@ class _Body extends StatelessWidget {
       body: BlocBuilder<ChooseHomeCubit, ChooseHomeState>(
           buildWhen: (p, c) => c is LayoutBuilderState,
           builder: (context, state) => state.maybeWhen(
-              buildings: () => Center(
+              buildings: (buildings) => Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,16 +40,23 @@ class _Body extends StatelessWidget {
                             )
                           ],
                         ),
-                        // ListView.builder(
-                        //     itemCount: 10,
-                        //     itemBuilder: (BuildContext context, int index) {
-                        //       return Container(
-                        //           margin: const EdgeInsets.symmetric(
-                        //               vertical: 5.0, horizontal: 10.0),
-                        //           height: 60);
-                        //     }),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: ListView.builder(
+                              itemCount: buildings.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 5.0, horizontal: 10.0),
+                                  height: 60,
+                                  child: Text(buildings[index].name),
+                                );
+                              }),
+                        ),
                       ],
                     ),
                   ),
-              orElse: () => Container())));
+              orElse: () => Container(
+                    color: Colors.amber,
+                  ))));
 }

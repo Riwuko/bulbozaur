@@ -23,6 +23,10 @@ class _$SingleHomeStateTearOff {
   _SingleHomeFailure failure() {
     return const _SingleHomeFailure();
   }
+
+  _SingleHomeCreateSchedule createSchedule() {
+    return const _SingleHomeCreateSchedule();
+  }
 }
 
 /// @nodoc
@@ -34,12 +38,14 @@ mixin _$SingleHomeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() failure,
+    required TResult Function() createSchedule,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? failure,
+    TResult Function()? createSchedule,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,12 +53,14 @@ mixin _$SingleHomeState {
   TResult map<TResult extends Object?>({
     required TResult Function(_SingleHomeInitial value) initial,
     required TResult Function(_SingleHomeFailure value) failure,
+    required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SingleHomeInitial value)? initial,
     TResult Function(_SingleHomeFailure value)? failure,
+    TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +125,7 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() failure,
+    required TResult Function() createSchedule,
   }) {
     return initial();
   }
@@ -126,6 +135,7 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? failure,
+    TResult Function()? createSchedule,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -139,6 +149,7 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(_SingleHomeInitial value) initial,
     required TResult Function(_SingleHomeFailure value) failure,
+    required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
   }) {
     return initial(this);
   }
@@ -148,6 +159,7 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SingleHomeInitial value)? initial,
     TResult Function(_SingleHomeFailure value)? failure,
+    TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -203,6 +215,7 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() failure,
+    required TResult Function() createSchedule,
   }) {
     return failure();
   }
@@ -212,6 +225,7 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? failure,
+    TResult Function()? createSchedule,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -225,6 +239,7 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_SingleHomeInitial value) initial,
     required TResult Function(_SingleHomeFailure value) failure,
+    required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
   }) {
     return failure(this);
   }
@@ -234,6 +249,7 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SingleHomeInitial value)? initial,
     TResult Function(_SingleHomeFailure value)? failure,
+    TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -245,4 +261,95 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
 
 abstract class _SingleHomeFailure implements SingleHomeState {
   const factory _SingleHomeFailure() = _$_SingleHomeFailure;
+}
+
+/// @nodoc
+abstract class _$SingleHomeCreateScheduleCopyWith<$Res> {
+  factory _$SingleHomeCreateScheduleCopyWith(_SingleHomeCreateSchedule value,
+          $Res Function(_SingleHomeCreateSchedule) then) =
+      __$SingleHomeCreateScheduleCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SingleHomeCreateScheduleCopyWithImpl<$Res>
+    extends _$SingleHomeStateCopyWithImpl<$Res>
+    implements _$SingleHomeCreateScheduleCopyWith<$Res> {
+  __$SingleHomeCreateScheduleCopyWithImpl(_SingleHomeCreateSchedule _value,
+      $Res Function(_SingleHomeCreateSchedule) _then)
+      : super(_value, (v) => _then(v as _SingleHomeCreateSchedule));
+
+  @override
+  _SingleHomeCreateSchedule get _value =>
+      super._value as _SingleHomeCreateSchedule;
+}
+
+/// @nodoc
+
+class _$_SingleHomeCreateSchedule implements _SingleHomeCreateSchedule {
+  const _$_SingleHomeCreateSchedule();
+
+  @override
+  String toString() {
+    return 'SingleHomeState.createSchedule()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _SingleHomeCreateSchedule);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() failure,
+    required TResult Function() createSchedule,
+  }) {
+    return createSchedule();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? failure,
+    TResult Function()? createSchedule,
+    required TResult orElse(),
+  }) {
+    if (createSchedule != null) {
+      return createSchedule();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SingleHomeInitial value) initial,
+    required TResult Function(_SingleHomeFailure value) failure,
+    required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
+  }) {
+    return createSchedule(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SingleHomeInitial value)? initial,
+    TResult Function(_SingleHomeFailure value)? failure,
+    TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
+    required TResult orElse(),
+  }) {
+    if (createSchedule != null) {
+      return createSchedule(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SingleHomeCreateSchedule implements SingleHomeState {
+  const factory _SingleHomeCreateSchedule() = _$_SingleHomeCreateSchedule;
 }

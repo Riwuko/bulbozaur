@@ -5,32 +5,50 @@ abstract class ButtonStyles {
 
   static ButtonStyle get roundedButton => ButtonStyle(
         enableFeedback: true,
-        elevation: MaterialStateProperty.all<double>(AppDimensions.baseButtonElevation),
+        elevation: MaterialStateProperty.all<double>(
+            AppDimensions.baseButtonElevation),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.baseButtonCornerRadius)),
+          RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.baseButtonCornerRadius)),
         ),
         backgroundColor: MaterialStateProperty.all<Color>(AppColors.azure),
-        overlayColor: MaterialStateProperty.all<Color>(AppColors.black.withOpacity(_overlayOpacity)),
+        overlayColor: MaterialStateProperty.all<Color>(
+            AppColors.black.withOpacity(_overlayOpacity)),
         foregroundColor: MaterialStateProperty.all<Color>(AppColors.white),
       );
 
   static ButtonStyle get loginPageButton => ButtonStyle(
-    enableFeedback: true,
-    elevation: MaterialStateProperty.all<double>(AppDimensions.baseButtonElevation),
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.baseButtonCornerRadius)),
-    ),
-    backgroundColor: MaterialStateProperty.all<Color>(AppColors.button),
-    overlayColor: MaterialStateProperty.all<Color>(AppColors.black.withOpacity(_overlayOpacity)),
-    foregroundColor: MaterialStateProperty.all<Color>(AppColors.white),
-  );
+        enableFeedback: true,
+        elevation: MaterialStateProperty.all<double>(
+            AppDimensions.baseButtonElevation),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(AppDimensions.baseButtonCornerRadius)),
+        ),
+        backgroundColor: MaterialStateProperty.all<Color>(AppColors.button),
+        overlayColor: MaterialStateProperty.all<Color>(
+            AppColors.black.withOpacity(_overlayOpacity)),
+        foregroundColor: MaterialStateProperty.all<Color>(AppColors.white),
+      );
 
   static ButtonStyle get ForgetPasswordLoginPageButton => ButtonStyle(
-    enableFeedback: true,
-    elevation: MaterialStateProperty.all<double>(AppDimensions.baseButtonElevation),
-
-    backgroundColor: MaterialStateProperty.all<Color>(AppColors.button),
-    overlayColor: MaterialStateProperty.all<Color>(AppColors.black.withOpacity(_overlayOpacity)),
-    foregroundColor: MaterialStateProperty.all<Color>(AppColors.white),
-  );
+        enableFeedback: true,
+        elevation: MaterialStateProperty.all<double>(
+            AppDimensions.baseButtonElevation),
+        backgroundColor: MaterialStateProperty.all<Color>(AppColors.button),
+        overlayColor: MaterialStateProperty.all<Color>(
+            AppColors.black.withOpacity(_overlayOpacity)),
+        foregroundColor: MaterialStateProperty.all<Color>(AppColors.white),
+      );
+  static ButtonStyle get IconButton => ButtonStyle(
+        enableFeedback: true,
+        elevation: MaterialStateProperty.all<double>(
+            AppDimensions.baseButtonElevation),
+        backgroundColor: MaterialStateProperty.all<Color>(AppColors.button),
+        overlayColor: MaterialStateProperty.all<Color>(
+            AppColors.black.withOpacity(_overlayOpacity)),
+        foregroundColor: MaterialStateProperty.all<Color>(AppColors.white),
+      );
 }

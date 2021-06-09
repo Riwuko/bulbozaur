@@ -23,6 +23,7 @@ abstract class AppImages {
   static final svgLogoOfTheApp = '$_svgPath/logo.svg';
   static final svgNameOfTheApp = '$_svgPath/bulb-ozaur.svg';
   static final svgBulbLogoCircle = '$_svgPath/app_bulb_circle.svg';
+  static final svgSingleHome = '$_svgPath/app_default_room.svg';
 
   static final pngHome1 = '$_pngPath/app_home1.png';
 }

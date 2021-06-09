@@ -20,8 +20,11 @@ class _$ChooseHomeStateTearOff {
     return const _ChooseHomeStateInitial();
   }
 
-  _ChooseHomeStateBuildings buildings() {
-    return const _ChooseHomeStateBuildings();
+  _ChooseHomeStateBuildings buildings(
+      {required List<BuildingsEntity> buildings}) {
+    return _ChooseHomeStateBuildings(
+      buildings: buildings,
+    );
   }
 
   _ChooseHomeStateFailure failure() {
@@ -37,14 +40,14 @@ mixin _$ChooseHomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() buildings,
+    required TResult Function(List<BuildingsEntity> buildings) buildings,
     required TResult Function() failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? buildings,
+    TResult Function(List<BuildingsEntity> buildings)? buildings,
     TResult Function()? failure,
     required TResult orElse(),
   }) =>
@@ -124,7 +127,7 @@ class _$_ChooseHomeStateInitial implements _ChooseHomeStateInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() buildings,
+    required TResult Function(List<BuildingsEntity> buildings) buildings,
     required TResult Function() failure,
   }) {
     return initial();
@@ -134,7 +137,7 @@ class _$_ChooseHomeStateInitial implements _ChooseHomeStateInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? buildings,
+    TResult Function(List<BuildingsEntity> buildings)? buildings,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -178,6 +181,7 @@ abstract class _$ChooseHomeStateBuildingsCopyWith<$Res> {
   factory _$ChooseHomeStateBuildingsCopyWith(_ChooseHomeStateBuildings value,
           $Res Function(_ChooseHomeStateBuildings) then) =
       __$ChooseHomeStateBuildingsCopyWithImpl<$Res>;
+  $Res call({List<BuildingsEntity> buildings});
 }
 
 /// @nodoc
@@ -191,46 +195,73 @@ class __$ChooseHomeStateBuildingsCopyWithImpl<$Res>
   @override
   _ChooseHomeStateBuildings get _value =>
       super._value as _ChooseHomeStateBuildings;
+
+  @override
+  $Res call({
+    Object? buildings = freezed,
+  }) {
+    return _then(_ChooseHomeStateBuildings(
+      buildings: buildings == freezed
+          ? _value.buildings
+          : buildings // ignore: cast_nullable_to_non_nullable
+              as List<BuildingsEntity>,
+    ));
+  }
 }
 
 /// @nodoc
 
+@Implements(LayoutBuilderState)
 class _$_ChooseHomeStateBuildings implements _ChooseHomeStateBuildings {
-  const _$_ChooseHomeStateBuildings();
+  const _$_ChooseHomeStateBuildings({required this.buildings});
+
+  @override
+  final List<BuildingsEntity> buildings;
 
   @override
   String toString() {
-    return 'ChooseHomeState.buildings()';
+    return 'ChooseHomeState.buildings(buildings: $buildings)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ChooseHomeStateBuildings);
+    return identical(this, other) ||
+        (other is _ChooseHomeStateBuildings &&
+            (identical(other.buildings, buildings) ||
+                const DeepCollectionEquality()
+                    .equals(other.buildings, buildings)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(buildings);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ChooseHomeStateBuildingsCopyWith<_ChooseHomeStateBuildings> get copyWith =>
+      __$ChooseHomeStateBuildingsCopyWithImpl<_ChooseHomeStateBuildings>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() buildings,
+    required TResult Function(List<BuildingsEntity> buildings) buildings,
     required TResult Function() failure,
   }) {
-    return buildings();
+    return buildings(this.buildings);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? buildings,
+    TResult Function(List<BuildingsEntity> buildings)? buildings,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
     if (buildings != null) {
-      return buildings();
+      return buildings(this.buildings);
     }
     return orElse();
   }
@@ -260,8 +291,15 @@ class _$_ChooseHomeStateBuildings implements _ChooseHomeStateBuildings {
   }
 }
 
-abstract class _ChooseHomeStateBuildings implements ChooseHomeState {
-  const factory _ChooseHomeStateBuildings() = _$_ChooseHomeStateBuildings;
+abstract class _ChooseHomeStateBuildings
+    implements ChooseHomeState, LayoutBuilderState {
+  const factory _ChooseHomeStateBuildings(
+      {required List<BuildingsEntity> buildings}) = _$_ChooseHomeStateBuildings;
+
+  List<BuildingsEntity> get buildings => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ChooseHomeStateBuildingsCopyWith<_ChooseHomeStateBuildings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -285,6 +323,7 @@ class __$ChooseHomeStateFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
+@Implements(FailureState)
 class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
   const _$_ChooseHomeStateFailure();
 
@@ -305,7 +344,7 @@ class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() buildings,
+    required TResult Function(List<BuildingsEntity> buildings) buildings,
     required TResult Function() failure,
   }) {
     return failure();
@@ -315,7 +354,7 @@ class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? buildings,
+    TResult Function(List<BuildingsEntity> buildings)? buildings,
     TResult Function()? failure,
     required TResult orElse(),
   }) {
@@ -350,6 +389,7 @@ class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
   }
 }
 
-abstract class _ChooseHomeStateFailure implements ChooseHomeState {
+abstract class _ChooseHomeStateFailure
+    implements ChooseHomeState, FailureState {
   const factory _ChooseHomeStateFailure() = _$_ChooseHomeStateFailure;
 }

@@ -1,7 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:project_skeleton/core/base_features/base/cubit/base_cubit.dart';
-import 'package:project_skeleton/domain/entities/core/getAllHouses.dart';
+import 'package:project_skeleton/domain/entities/buildings_entities/buildings_entity.dart';
+import 'package:project_skeleton/domain/use_case/getAllHouses.dart';
 
 part 'choose_home_cubit.freezed.dart';
 part 'choose_home_state.dart';
@@ -14,8 +15,9 @@ class ChooseHomeCubit extends BaseCubit<ChooseHomeState> {
 
   @override
   Future<void> init() async {
-    await _getTheHouses();
-    print("dog");
-    emit(ChooseHomeState.buildings());
+    (await _getTheHouses()).fold(
+      (failure) => emit(ChooseHomeState.failure()),
+      (r) => emit(ChooseHomeState.buildings(buildings: r)),
+    );
   }
 }

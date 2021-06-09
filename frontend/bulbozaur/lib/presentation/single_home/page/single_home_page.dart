@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project_skeleton/core/app/router.dart';
 import 'package:project_skeleton/core/base_features/base/page/base_page.dart';
 import 'package:project_skeleton/core/injection/injection.dart';
 import 'package:project_skeleton/core/presentation/styles/styles.dart';
@@ -24,18 +25,28 @@ class _Body extends StatelessWidget {
   final PageController controller = PageController(initialPage: 0);
 
   @override
-  Widget build(BuildContext context) => PageView(
-        scrollDirection: Axis.horizontal,
-        controller: controller,
-        children: [
-          _singleHomeFirstPage(),
-          _statisticsHome(context),
-          _controlSchedule(context, schedule),
-          _settingsHome()
-        ],
+  Widget build(BuildContext context) =>
+      BlocListener<SingleHomeCubit, SingleHomeState>(
+        listener: (context, state) => state.maybeWhen(
+            createSchedule: () =>
+                context.navigator.push(CreateSchedulePageRoute()),
+            failure: () => Container(
+                  child: Text("its some problems"),
+                ),
+            orElse: () => Container()),
+        child: PageView(
+          scrollDirection: Axis.horizontal,
+          controller: controller,
+          children: [
+            _singleHomeFirstPage(context),
+            _statisticsHome(context),
+            _controlSchedule(context, schedule),
+            _settingsHome(context)
+          ],
+        ),
       );
 
-  Widget _singleHomeFirstPage() {
+  Widget _singleHomeFirstPage(BuildContext context) {
     bool manualControl = false;
     var _listOfRooms = [
       "kitchen",
@@ -60,7 +71,10 @@ class _Body extends StatelessWidget {
                 Text("Manual control", style: TextStyles.singleHomeManual),
                 CupertinoSwitch(
                   value: manualControl,
-                  onChanged: (bool manualControl) => print("changed"),
+                  onChanged: (bool value) {
+                    _didChangeManualControl(context, value);
+                    manualControl = true;
+                  },
                 )
               ],
             ),
@@ -90,7 +104,7 @@ class _Body extends StatelessWidget {
               ]),
             ),
           ),
-          _downBar(controller, [false, true, false, false]),
+          _downBar(controller, [true, false, false, false]),
         ],
       ),
     );
@@ -156,8 +170,17 @@ class _Body extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 20.0),
                     height: 60,
                     child: TextButton(
-                        onPressed: () => null,
-                        child: Text('${schedule[index].name}'),
+                        onPressed: () => _createControlSchedule(context),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(right: 40.0),
+                              child: Icon(_selectIcon(schedule[index].id)),
+                            ),
+                            Text('${schedule[index].name}'),
+                          ],
+                        ),
                         style: ButtonStyles.loginPageButton),
                   );
                 },
@@ -170,7 +193,7 @@ class _Body extends StatelessWidget {
                   width: 200.0,
                 ),
                 GestureDetector(
-                  onTap: null,
+                  onTap: () => _createControlSchedule(context),
                   child: Container(
                     width: 60,
                     height: 60,
@@ -192,18 +215,29 @@ class _Body extends StatelessWidget {
         ),
       );
 
-  Widget _settingsHome() => Scaffold(
+  Widget _settingsHome(BuildContext context) => Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
+              alignment: Alignment.center,
               margin: const EdgeInsets.only(top: 40),
               child: Text(
                 "Settings",
                 style: TextStyles.menuTitlePage,
               ),
-            )
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextButton(
+                  onPressed: null,
+                  child: Text(
+                    "Log out",
+                  ),
+                  style: ButtonStyles.loginPageButton),
+            ),
+            _downBar(controller, [false, false, false, true])
           ],
         ),
       );
@@ -262,9 +296,6 @@ class _Body extends StatelessWidget {
         ),
       );
 
-  void _didChangeManualControl(BuildContext context, bool isTrue) =>
-      context.read<SingleHomeCubit>().didChangeManualControl(isTrue);
-
   double _theWidthOfTextField(BuildContext context) =>
       MediaQuery.of(context).size.width * 0.8;
 
@@ -275,4 +306,29 @@ class _Body extends StatelessWidget {
       return MediaQuery.of(context).size.width * 0.3 * index;
     }
   }
+
+  IconData _selectIcon(int id) {
+    switch (id) {
+      case 0:
+        return Icons.home;
+      case 1:
+        return Icons.bed;
+      case 2:
+        return Icons.doorbell;
+      case 3:
+        return Icons.mode_night;
+      case 4:
+        return Icons.alarm;
+      case 5:
+        return Icons.party_mode;
+      default:
+        return Icons.home;
+    }
+  }
+
+  void _didChangeManualControl(BuildContext context, bool isTrue) =>
+      context.read<SingleHomeCubit>().didChangeManualControl(isTrue);
+
+  void _createControlSchedule(BuildContext context) =>
+      context.read<SingleHomeCubit>().createControlSchedule();
 }
