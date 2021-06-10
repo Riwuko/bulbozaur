@@ -241,6 +241,7 @@ class ChangeDeviceState(graphene.Mutation):
     class Arguments:
         id = graphene.ID()
         state = graphene.Boolean()
+        state_value = graphene.Decimal()
         token=graphene.String(required=True)
 
     device = graphene.Field(ActuatingDeviceType)
@@ -250,6 +251,7 @@ class ChangeDeviceState(graphene.Mutation):
     def mutate(root, info, id, **kwargs):
         device=get_object_or_404(ActuatingDevice, id=id, building__user=info.context.user)
         device.state = kwargs.get("state", device.state)
+        device.state_value = kwargs.get("state_value", device.state_value)
         device.save()
         ok = True
         return ChangeDeviceState(device = device, ok=ok)
@@ -280,7 +282,7 @@ class ChangeControlParameter(graphene.Mutation):
         light_value = graphene.Decimal()
         token=graphene.String(required=True)
 
-    control_parameter = graphene.Field(ActuatingDeviceType)
+    control_parameter = graphene.Field(ControlParameterType)
     ok = graphene.Boolean()
 
     @login_required
