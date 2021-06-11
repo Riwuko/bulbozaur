@@ -18,15 +18,15 @@ class LoginCubit extends BaseCubit<LoginState> {
 
   Future<void> didTapContinueButton(String login, String password) async {
     var responses = false;
-    // (await _checkIfLoginIsGood(login, password)).fold(
-    //   (l) => emit(LoginState.failure()),
-    //   (r) => responses = r,
-    // );
-    // if (responses == true) {
-    //   emit(LoginState.loginSuccess());
-    // } else {
-    //   emit(LoginState.invalidAdress());
-    // }
+    (await _checkIfLoginIsGood(login, password)).fold(
+      (l) => emit(LoginState.failure()),
+      (r) => responses = r,
+    );
+    if (responses == true) {
+      emit(LoginState.loginSuccess());
+    } else {
+      emit(LoginState.invalidAdress());
+    }
     emit(LoginState.loginSuccess());
   }
 }

@@ -28,8 +28,9 @@ class CodigeeRouter extends _i1.RootStackRouter {
         }),
     SingleHomePageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return _i4.SingleHomePage();
+        builder: (data) {
+          final args = data.argsAs<SingleHomePageRouteArgs>();
+          return _i4.SingleHomePage(args.idOfHouse);
         }),
     ChooseHomePageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -67,10 +68,19 @@ class LoginPageRoute extends _i1.PageRouteInfo {
   static const String name = 'LoginPageRoute';
 }
 
-class SingleHomePageRoute extends _i1.PageRouteInfo {
-  const SingleHomePageRoute() : super(name, path: '/single-home-page');
+class SingleHomePageRoute extends _i1.PageRouteInfo<SingleHomePageRouteArgs> {
+  SingleHomePageRoute({required int idOfHouse})
+      : super(name,
+            path: '/single-home-page',
+            args: SingleHomePageRouteArgs(idOfHouse: idOfHouse));
 
   static const String name = 'SingleHomePageRoute';
+}
+
+class SingleHomePageRouteArgs {
+  const SingleHomePageRouteArgs({required this.idOfHouse});
+
+  final int idOfHouse;
 }
 
 class ChooseHomePageRoute extends _i1.PageRouteInfo {

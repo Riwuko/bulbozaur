@@ -30,6 +30,12 @@ class _$ChooseHomeStateTearOff {
   _ChooseHomeStateFailure failure() {
     return const _ChooseHomeStateFailure();
   }
+
+  _ChooseHomeStateGoToTheSingleRoom goToTheSingleRoom({required int index}) {
+    return _ChooseHomeStateGoToTheSingleRoom(
+      index: index,
+    );
+  }
 }
 
 /// @nodoc
@@ -42,6 +48,7 @@ mixin _$ChooseHomeState {
     required TResult Function() initial,
     required TResult Function(List<BuildingsEntity> buildings) buildings,
     required TResult Function() failure,
+    required TResult Function(int index) goToTheSingleRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,6 +56,7 @@ mixin _$ChooseHomeState {
     TResult Function()? initial,
     TResult Function(List<BuildingsEntity> buildings)? buildings,
     TResult Function()? failure,
+    TResult Function(int index)? goToTheSingleRoom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -57,6 +65,8 @@ mixin _$ChooseHomeState {
     required TResult Function(_ChooseHomeStateInitial value) initial,
     required TResult Function(_ChooseHomeStateBuildings value) buildings,
     required TResult Function(_ChooseHomeStateFailure value) failure,
+    required TResult Function(_ChooseHomeStateGoToTheSingleRoom value)
+        goToTheSingleRoom,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +74,8 @@ mixin _$ChooseHomeState {
     TResult Function(_ChooseHomeStateInitial value)? initial,
     TResult Function(_ChooseHomeStateBuildings value)? buildings,
     TResult Function(_ChooseHomeStateFailure value)? failure,
+    TResult Function(_ChooseHomeStateGoToTheSingleRoom value)?
+        goToTheSingleRoom,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,6 +141,7 @@ class _$_ChooseHomeStateInitial implements _ChooseHomeStateInitial {
     required TResult Function() initial,
     required TResult Function(List<BuildingsEntity> buildings) buildings,
     required TResult Function() failure,
+    required TResult Function(int index) goToTheSingleRoom,
   }) {
     return initial();
   }
@@ -139,6 +152,7 @@ class _$_ChooseHomeStateInitial implements _ChooseHomeStateInitial {
     TResult Function()? initial,
     TResult Function(List<BuildingsEntity> buildings)? buildings,
     TResult Function()? failure,
+    TResult Function(int index)? goToTheSingleRoom,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -153,6 +167,8 @@ class _$_ChooseHomeStateInitial implements _ChooseHomeStateInitial {
     required TResult Function(_ChooseHomeStateInitial value) initial,
     required TResult Function(_ChooseHomeStateBuildings value) buildings,
     required TResult Function(_ChooseHomeStateFailure value) failure,
+    required TResult Function(_ChooseHomeStateGoToTheSingleRoom value)
+        goToTheSingleRoom,
   }) {
     return initial(this);
   }
@@ -163,6 +179,8 @@ class _$_ChooseHomeStateInitial implements _ChooseHomeStateInitial {
     TResult Function(_ChooseHomeStateInitial value)? initial,
     TResult Function(_ChooseHomeStateBuildings value)? buildings,
     TResult Function(_ChooseHomeStateFailure value)? failure,
+    TResult Function(_ChooseHomeStateGoToTheSingleRoom value)?
+        goToTheSingleRoom,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -211,7 +229,7 @@ class __$ChooseHomeStateBuildingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-@Implements(LayoutBuilderState)
+@Implements(BuildingState)
 class _$_ChooseHomeStateBuildings implements _ChooseHomeStateBuildings {
   const _$_ChooseHomeStateBuildings({required this.buildings});
 
@@ -248,6 +266,7 @@ class _$_ChooseHomeStateBuildings implements _ChooseHomeStateBuildings {
     required TResult Function() initial,
     required TResult Function(List<BuildingsEntity> buildings) buildings,
     required TResult Function() failure,
+    required TResult Function(int index) goToTheSingleRoom,
   }) {
     return buildings(this.buildings);
   }
@@ -258,6 +277,7 @@ class _$_ChooseHomeStateBuildings implements _ChooseHomeStateBuildings {
     TResult Function()? initial,
     TResult Function(List<BuildingsEntity> buildings)? buildings,
     TResult Function()? failure,
+    TResult Function(int index)? goToTheSingleRoom,
     required TResult orElse(),
   }) {
     if (buildings != null) {
@@ -272,6 +292,8 @@ class _$_ChooseHomeStateBuildings implements _ChooseHomeStateBuildings {
     required TResult Function(_ChooseHomeStateInitial value) initial,
     required TResult Function(_ChooseHomeStateBuildings value) buildings,
     required TResult Function(_ChooseHomeStateFailure value) failure,
+    required TResult Function(_ChooseHomeStateGoToTheSingleRoom value)
+        goToTheSingleRoom,
   }) {
     return buildings(this);
   }
@@ -282,6 +304,8 @@ class _$_ChooseHomeStateBuildings implements _ChooseHomeStateBuildings {
     TResult Function(_ChooseHomeStateInitial value)? initial,
     TResult Function(_ChooseHomeStateBuildings value)? buildings,
     TResult Function(_ChooseHomeStateFailure value)? failure,
+    TResult Function(_ChooseHomeStateGoToTheSingleRoom value)?
+        goToTheSingleRoom,
     required TResult orElse(),
   }) {
     if (buildings != null) {
@@ -292,7 +316,7 @@ class _$_ChooseHomeStateBuildings implements _ChooseHomeStateBuildings {
 }
 
 abstract class _ChooseHomeStateBuildings
-    implements ChooseHomeState, LayoutBuilderState {
+    implements ChooseHomeState, BuildingState {
   const factory _ChooseHomeStateBuildings(
       {required List<BuildingsEntity> buildings}) = _$_ChooseHomeStateBuildings;
 
@@ -346,6 +370,7 @@ class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
     required TResult Function() initial,
     required TResult Function(List<BuildingsEntity> buildings) buildings,
     required TResult Function() failure,
+    required TResult Function(int index) goToTheSingleRoom,
   }) {
     return failure();
   }
@@ -356,6 +381,7 @@ class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
     TResult Function()? initial,
     TResult Function(List<BuildingsEntity> buildings)? buildings,
     TResult Function()? failure,
+    TResult Function(int index)? goToTheSingleRoom,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -370,6 +396,8 @@ class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
     required TResult Function(_ChooseHomeStateInitial value) initial,
     required TResult Function(_ChooseHomeStateBuildings value) buildings,
     required TResult Function(_ChooseHomeStateFailure value) failure,
+    required TResult Function(_ChooseHomeStateGoToTheSingleRoom value)
+        goToTheSingleRoom,
   }) {
     return failure(this);
   }
@@ -380,6 +408,8 @@ class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
     TResult Function(_ChooseHomeStateInitial value)? initial,
     TResult Function(_ChooseHomeStateBuildings value)? buildings,
     TResult Function(_ChooseHomeStateFailure value)? failure,
+    TResult Function(_ChooseHomeStateGoToTheSingleRoom value)?
+        goToTheSingleRoom,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -392,4 +422,136 @@ class _$_ChooseHomeStateFailure implements _ChooseHomeStateFailure {
 abstract class _ChooseHomeStateFailure
     implements ChooseHomeState, FailureState {
   const factory _ChooseHomeStateFailure() = _$_ChooseHomeStateFailure;
+}
+
+/// @nodoc
+abstract class _$ChooseHomeStateGoToTheSingleRoomCopyWith<$Res> {
+  factory _$ChooseHomeStateGoToTheSingleRoomCopyWith(
+          _ChooseHomeStateGoToTheSingleRoom value,
+          $Res Function(_ChooseHomeStateGoToTheSingleRoom) then) =
+      __$ChooseHomeStateGoToTheSingleRoomCopyWithImpl<$Res>;
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$ChooseHomeStateGoToTheSingleRoomCopyWithImpl<$Res>
+    extends _$ChooseHomeStateCopyWithImpl<$Res>
+    implements _$ChooseHomeStateGoToTheSingleRoomCopyWith<$Res> {
+  __$ChooseHomeStateGoToTheSingleRoomCopyWithImpl(
+      _ChooseHomeStateGoToTheSingleRoom _value,
+      $Res Function(_ChooseHomeStateGoToTheSingleRoom) _then)
+      : super(_value, (v) => _then(v as _ChooseHomeStateGoToTheSingleRoom));
+
+  @override
+  _ChooseHomeStateGoToTheSingleRoom get _value =>
+      super._value as _ChooseHomeStateGoToTheSingleRoom;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(_ChooseHomeStateGoToTheSingleRoom(
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ChooseHomeStateGoToTheSingleRoom
+    implements _ChooseHomeStateGoToTheSingleRoom {
+  const _$_ChooseHomeStateGoToTheSingleRoom({required this.index});
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'ChooseHomeState.goToTheSingleRoom(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ChooseHomeStateGoToTheSingleRoom &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(index);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ChooseHomeStateGoToTheSingleRoomCopyWith<_ChooseHomeStateGoToTheSingleRoom>
+      get copyWith => __$ChooseHomeStateGoToTheSingleRoomCopyWithImpl<
+          _ChooseHomeStateGoToTheSingleRoom>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<BuildingsEntity> buildings) buildings,
+    required TResult Function() failure,
+    required TResult Function(int index) goToTheSingleRoom,
+  }) {
+    return goToTheSingleRoom(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<BuildingsEntity> buildings)? buildings,
+    TResult Function()? failure,
+    TResult Function(int index)? goToTheSingleRoom,
+    required TResult orElse(),
+  }) {
+    if (goToTheSingleRoom != null) {
+      return goToTheSingleRoom(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChooseHomeStateInitial value) initial,
+    required TResult Function(_ChooseHomeStateBuildings value) buildings,
+    required TResult Function(_ChooseHomeStateFailure value) failure,
+    required TResult Function(_ChooseHomeStateGoToTheSingleRoom value)
+        goToTheSingleRoom,
+  }) {
+    return goToTheSingleRoom(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChooseHomeStateInitial value)? initial,
+    TResult Function(_ChooseHomeStateBuildings value)? buildings,
+    TResult Function(_ChooseHomeStateFailure value)? failure,
+    TResult Function(_ChooseHomeStateGoToTheSingleRoom value)?
+        goToTheSingleRoom,
+    required TResult orElse(),
+  }) {
+    if (goToTheSingleRoom != null) {
+      return goToTheSingleRoom(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChooseHomeStateGoToTheSingleRoom implements ChooseHomeState {
+  const factory _ChooseHomeStateGoToTheSingleRoom({required int index}) =
+      _$_ChooseHomeStateGoToTheSingleRoom;
+
+  int get index => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ChooseHomeStateGoToTheSingleRoomCopyWith<_ChooseHomeStateGoToTheSingleRoom>
+      get copyWith => throw _privateConstructorUsedError;
 }

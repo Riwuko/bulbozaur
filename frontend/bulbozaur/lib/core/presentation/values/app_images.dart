@@ -25,5 +25,16 @@ abstract class AppImages {
   static final svgBulbLogoCircle = '$_svgPath/app_bulb_circle.svg';
   static final svgSingleHome = '$_svgPath/app_default_room.svg';
 
+  static final svgPhotoHome1 = '$_svgPath/home_photo_1.svg';
+  static final svgPhotoHome2 = '$_svgPath/home_photo_2.svg';
+  static final svgPhotoHome3 = '$_svgPath/home_photo_3.svg';
+  static final svgPhotoHome4 = '$_svgPath/home_photo_4.svg';
+  static final svgPhotoHome5 = '$_svgPath/home_photo_5.svg';
+  static final svgPhotoHome6 = '$_svgPath/home_photo_6.svg';
+  static final svgPhotoHome7 = '$_svgPath/home_photo_7.svg';
+  static final svgPhotoHome8 = '$_svgPath/home_photo_8.svg';
+  static final svgPhotoHome9 = '$_svgPath/home_photo_9.svg';
+  static final svgPhotoHome10 = '$_svgPath/home_photo_10.svg';
+
   static final pngHome1 = '$_pngPath/app_home1.png';
 }

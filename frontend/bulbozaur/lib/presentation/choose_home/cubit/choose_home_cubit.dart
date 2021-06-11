@@ -20,4 +20,8 @@ class ChooseHomeCubit extends BaseCubit<ChooseHomeState> {
       (r) => emit(ChooseHomeState.buildings(buildings: r)),
     );
   }
+
+  Future<void> didTapHome(int id) async {
+    emit(ChooseHomeState.goToTheSingleRoom(index: id));
+  }
 }

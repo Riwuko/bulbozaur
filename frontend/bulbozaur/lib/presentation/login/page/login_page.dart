@@ -34,7 +34,7 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) => BlocListener<LoginCubit, LoginState>(
         listener: (context, state) => state.maybeWhen(
-            loginSuccess: () => context.navigator.push(SingleHomePageRoute()),
+            loginSuccess: () => context.navigator.push(ChooseHomePageRoute()),
             failure: () => Container(
                   child: Text("its some problems"),
                 ),

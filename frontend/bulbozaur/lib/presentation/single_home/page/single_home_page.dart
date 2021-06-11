@@ -14,15 +14,20 @@ import 'package:project_skeleton/domain/entities/single_home_entites/schedule_en
 import 'package:project_skeleton/presentation/single_home/cubit/single_home_cubit.dart';
 
 class SingleHomePage extends BasePage {
+  int idOfHouse;
+  SingleHomePage(this.idOfHouse);
   @override
   Widget build(BuildContext context) => BlocProvider(
         create: (_) => getIt<SingleHomeCubit>()..init(),
-        child: _Body(),
+        child: _Body(idOfHouse),
       );
 }
 
 class _Body extends StatelessWidget {
   final PageController controller = PageController(initialPage: 0);
+  int idOfHouse;
+
+  _Body(this.idOfHouse);
 
   @override
   Widget build(BuildContext context) =>

@@ -42,4 +42,10 @@ class TextStyles {
     fontSize: 36,
     fontWeight: FontWeight.w900,
   );
+
+  static const buildingsText = TextStyle(
+    color: Colors.blue,
+    fontSize: 36,
+    fontWeight: FontWeight.w900,
+  );
 }
