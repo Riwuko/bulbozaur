@@ -1,6 +1,6 @@
 from django.db import models
 from polymorphic.models import PolymorphicModel
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from users.models import User
 
 
@@ -30,6 +30,10 @@ class MeasuringDevice(Device):
 class ActuatingDevice(Device):
     state = models.BooleanField(null=False, default=False)
     state_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=None)
+    light_level = models.IntegerField(blank=True, null=True, validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ])
 
     def __str__(self):
         return f"Actuating device: {str(self.id)} | name: {self.name}"
@@ -43,6 +47,7 @@ class Schedule(models.Model):
     icon = models.IntegerField(null=True, blank=True, default=0)
     time_from = models.TimeField()
     time_to = models.TimeField()
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Schedule: {str(self.id)} | name: {self.name}"
@@ -54,6 +59,10 @@ class ScheduleDeviceState(models.Model):
     )
     state = models.BooleanField(null=False, default=False)
     state_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=None)
+    light_level = models.IntegerField(blank=True, null=True, validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)
+        ])
     schedule = models.ForeignKey(
         Schedule, related_name="schedule_devices_states", null=False, on_delete=models.CASCADE
     )
@@ -70,7 +79,8 @@ class ScheduleDeviceState(models.Model):
 
 class Measurement(models.Model):
     measure_date = models.DateTimeField(auto_now=True, null=False)
-    measure_value = models.DecimalField(max_digits=10, decimal_places=3, null=True)
+    measure_value = models.DecimalField(max_digits=10, decimal_places=3)
+    measure_parameter = models.TextField()
     device = models.ForeignKey(
         Device, on_delete=models.CASCADE, related_name="device_measurements"
     )
