@@ -29,12 +29,15 @@ class _Body extends StatefulWidget {
 class _BodyState extends State<_Body> {
   final int iconId;
   final _nameController = TextEditingController();
+  final _fromTime = TextEditingController();
+  final _toTime = TextEditingController();
 
   _BodyState(this.iconId);
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Center(
+          body: Center(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,6 +45,9 @@ class _BodyState extends State<_Body> {
               Text("Add schedule",
                   style: TextStyles.singleHomeManual.copyWith(fontSize: 40.0)),
               Text("Name schedule",
+                  style:
+                      TextStyles.singleHomeNameOfRoom.copyWith(fontSize: 20.0)),
+              Text("Set the duration",
                   style:
                       TextStyles.singleHomeNameOfRoom.copyWith(fontSize: 20.0)),
               Container(
@@ -67,11 +73,11 @@ class _BodyState extends State<_Body> {
                     height: MediaQuery.of(context).size.height * 0.30,
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: TextFormField(
-                      controller: _nameController,
+                      controller: _fromTime,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           filled: true,
-                          hintText: "Name",
+                          hintText: "Hour From",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: AppColors.white),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -83,11 +89,11 @@ class _BodyState extends State<_Body> {
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: TextFormField(
-                      controller: _nameController,
+                      controller: _toTime,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           filled: true,
-                          hintText: "Name",
+                          hintText: "Hour To",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: AppColors.white),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -96,9 +102,23 @@ class _BodyState extends State<_Body> {
                     ),
                   ),
                 ],
-              )
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.07,
+                child: TextButton(
+                    onPressed: () => _didTapNextButton(context, iconId,
+                        _nameController.text, _fromTime.text, _toTime.text),
+                    child: Text("Next"),
+                    style: ButtonStyles.loginPageButton),
+              ),
             ],
           ),
         ),
-      );
+      ));
+  void _didTapNextButton(BuildContext context, int idIcon, String name,
+          String from, String to) =>
+      context
+          .read<CreateScheduleCubit>()
+          .didTapNextButton(idIcon, name, from, to);
 }

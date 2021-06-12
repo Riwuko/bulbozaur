@@ -45,6 +45,7 @@ devices(building_Id:$id,token:$token){
     print("dog");
     if (result.hasException) {
       print(result.exception.toString());
+      print(result.data);
       return Left(Failure.invalidParameter());
     } else {
       print(result.data.toString());

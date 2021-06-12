@@ -23,11 +23,31 @@ class SingleHomePage extends BasePage {
       );
 }
 
-class _Body extends StatelessWidget {
-  final PageController controller = PageController(initialPage: 0);
-  int idOfHouse;
+class _Body extends StatefulWidget {
+  final idOfHouse;
 
-  _Body(this.idOfHouse);
+  const _Body(this.idOfHouse);
+
+  State<StatefulWidget> createState() => _BodyState(idOfHouse);
+}
+
+class _BodyState extends State<_Body> {
+  final idOfHouse;
+  bool manualControl = false;
+  _BodyState(this.idOfHouse);
+
+  final PageController controller = PageController(initialPage: 0);
+
+  void _changeManual(bool value) {
+    print(manualControl);
+    setState(() => manualControl = value);
+    manualControl = value;
+
+    _didChangeManualControl(context, value);
+    print(manualControl);
+  }
+
+  void _expansionCallback(int item, bool isExpand) {}
 
   @override
   Widget build(BuildContext context) =>
@@ -43,16 +63,14 @@ class _Body extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           controller: controller,
           children: [
-            _singleHomeFirstPage(context),
+            _singleHomeFirstPage(context, manualControl),
             _statisticsHome(context),
             _controlSchedule(context, schedule),
             _settingsHome(context)
           ],
         ),
       );
-
-  Widget _singleHomeFirstPage(BuildContext context) {
-    bool manualControl = false;
+  Widget _singleHomeFirstPage(BuildContext context, bool manualControl) {
     var _listOfRooms = [
       "kitchen",
       "living room",
@@ -61,6 +79,7 @@ class _Body extends StatelessWidget {
       "charmander",
       "rattata"
     ];
+    double _currentSlide = 0;
 
     return Scaffold(
       body: Column(
@@ -74,40 +93,53 @@ class _Body extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text("Manual control", style: TextStyles.singleHomeManual),
-                CupertinoSwitch(
+                Switch(
                   value: manualControl,
-                  onChanged: (bool value) {
-                    _didChangeManualControl(context, value);
-                    manualControl = true;
-                  },
+                  onChanged: (bool value) => _changeManual(value),
+                  activeTrackColor: Colors.blueGrey,
+                  activeColor: Colors.blue,
                 )
               ],
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: _listOfRooms.length,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (BuildContext context, int index) => Row(children: [
-                Container(
-                  child: SvgPicture.asset(AppImages.svgBulbLogoCircle),
-                  margin: const EdgeInsets.only(
-                      left: 40, right: 20, top: 20, bottom: 20),
-                ),
-                Container(
-                  child: Text(
-                    _listOfRooms[index],
-                    style: TextStyles.singleHomeNameOfRoom,
-                  ),
-                  margin: const EdgeInsets.only(top: 20),
-                ),
-                Spacer(),
-                Container(
-                  child: CupertinoSwitch(value: false, onChanged: null),
-                  margin: const EdgeInsets.only(right: 50, top: 20),
-                )
-              ]),
-            ),
+                itemCount: _listOfRooms.length,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (BuildContext context, int index) =>
+                    ExpansionPanelList(
+                      expansionCallback: (int item, bool status) {},
+                      children: [
+                        ExpansionPanel(
+                          headerBuilder:
+                              (BuildContext context, bool isExpanded) => Row(
+                            children: [
+                              Container(
+                                child: SvgPicture.asset(
+                                    AppImages.svgBulbLogoCircle),
+                                margin: const EdgeInsets.only(
+                                    left: 40, right: 20, top: 20, bottom: 20),
+                              ),
+                              Container(
+                                child: Text(
+                                  _listOfRooms[index],
+                                  style: TextStyles.singleHomeNameOfRoom,
+                                ),
+                                margin: const EdgeInsets.only(top: 20),
+                              ),
+                              Spacer(),
+                              Container(
+                                child: Switch(value: false, onChanged: null),
+                                margin:
+                                    const EdgeInsets.only(right: 50, top: 20),
+                              )
+                            ],
+                          ),
+                          isExpanded: true,
+                          body: Slider(value: _currentSlide, onChanged: null),
+                        )
+                      ],
+                    )),
           ),
           _downBar(controller, [true, false, false, false]),
         ],

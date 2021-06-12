@@ -24,7 +24,8 @@ class _Body extends StatelessWidget {
                     .push(CreateSchedulePageTwoRoute(iconId: idIcon)),
               ),
           child: Scaffold(
-            body: Center(
+              body: Center(
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,7 +45,7 @@ class _Body extends StatelessWidget {
                       children: [
                         IconButton(
                             iconSize: 70.0,
-                            onPressed: () => _didTapIcon(context, 0),
+                            onPressed: () => {_didTapIcon(context, 0)},
                             icon: Icon(Icons.home)),
                         IconButton(
                             iconSize: 70.0,
@@ -84,7 +85,7 @@ class _Body extends StatelessWidget {
                 ],
               ),
             ),
-          ));
+          )));
 
   void _didTapIcon(BuildContext context, int idIcon) =>
       context.read<CreateScheduleCubit>().didChangeManualControl(idIcon);

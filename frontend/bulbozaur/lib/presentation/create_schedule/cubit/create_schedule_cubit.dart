@@ -16,4 +16,7 @@ class CreateScheduleCubit extends BaseCubit<CreateScheduleState> {
   Future<void> didChangeManualControl(int idIcon) async {
     emit(CreateScheduleState.choosedIcon(id: idIcon));
   }
+
+  Future<void> didTapNextButton(
+      int idIcon, String name, String from, String to) async {}
 }
