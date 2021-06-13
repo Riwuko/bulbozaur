@@ -1,6 +1,12 @@
 version: '3.8'
 
 services:
+  elasticsearch:
+    image: elasticsearch:6.4.2
+    volumes:
+      - .:/code/elasticsearch
+    ports:
+      - "9200:9200"
   db:
     image: postgres:12
     env_file: .env
@@ -17,3 +23,4 @@ services:
       - ./static:/static
     depends_on:
       - db
+      - elasticsearch

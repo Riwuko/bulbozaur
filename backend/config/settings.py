@@ -39,7 +39,6 @@ CORS_ALLOW_CREDENTIALS = True
 # Application definition
 
 INSTALLED_APPS = [
-    
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -49,9 +48,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "djoser",
     "users",
+    "django_filters",
     "smarthome",
     "corsheaders",
-
+    "graphene_django",
+    "django_elasticsearch_dsl",
+    'polymorphic',
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -131,7 +133,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -177,5 +179,43 @@ SIMPLE_JWT = {
 }
 
 AUTHENTICATION_BACKENDS = (
+    "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 )
+
+GRAPHENE = {
+    "SCHEMA": "config.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
+}
+
+GRAPHQL_JWT = {
+    "JWT_ALLOW_ARGUMENT": True,
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(days=1),
+    "JWT_REFRESH_EXPIRATION_DELTA": datetime.timedelta(days=365),
+}
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'elasticsearch:9200'
+    },
+}
+
+ELASTICSEARCH_CONNECTION_DEFAULTS = {
+    'hosts': ['localhost'],
+    'timeout': 5,
+}
+
+ELASTICSEARCH_CONNECTION = os.environ.get(
+    "ELASTICSEARCH_CONNECTION",
+    ELASTICSEARCH_CONNECTION_DEFAULTS
+)
+
+if isinstance(ELASTICSEARCH_CONNECTION, str):
+    try:
+        ELASTICSEARCH_CONNECTION = json.loads(ELASTICSEARCH_CONNECTION)
+    except:
+        ELASTICSEARCH_CONNECTION = ELASTICSEARCH_CONNECTION_DEFAULTS
+
