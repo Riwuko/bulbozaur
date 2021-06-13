@@ -16,7 +16,6 @@ import '../../presentation/create_schedule/page/create_schedule_page_three.dart'
 import '../../presentation/create_schedule/page/create_schedule_page_two.dart'
     as _i7;
 import '../../presentation/login/page/login_page.dart' as _i3;
-import '../../presentation/single_home/page/single_home_page.dart' as _i4;
 
 class CodigeeRouter extends _i1.RootStackRouter {
   CodigeeRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -28,6 +27,7 @@ class CodigeeRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (_) {
           return _i3.LoginPage();
+<<<<<<< HEAD
         }),
     SingleHomePageRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
@@ -77,6 +77,14 @@ class CodigeeRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(CreateSchedulePageThreeRoute.name,
             path: '/create-schedule-page-three')
       ];
+=======
+        })
+  };
+
+  @override
+  List<_i1.RouteConfig> get routes =>
+      [_i1.RouteConfig(LoginPageRoute.name, path: '/')];
+>>>>>>> main
 }
 
 class LoginPageRoute extends _i1.PageRouteInfo {
@@ -84,6 +92,7 @@ class LoginPageRoute extends _i1.PageRouteInfo {
 
   static const String name = 'LoginPageRoute';
 }
+<<<<<<< HEAD
 
 class SingleHomePageRoute extends _i1.PageRouteInfo<SingleHomePageRouteArgs> {
   SingleHomePageRoute({required int idOfHouse})
@@ -166,3 +175,5 @@ class CreateSchedulePageThreeRouteArgs {
 
   final List<_i9.deviceDisplay> devices;
 }
+=======
+>>>>>>> main

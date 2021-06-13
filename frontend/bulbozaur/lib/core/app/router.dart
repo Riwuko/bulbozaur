@@ -5,7 +5,6 @@ import 'package:project_skeleton/presentation/create_schedule/page/create_schedu
 import 'package:project_skeleton/presentation/create_schedule/page/create_schedule_page_three.dart';
 import 'package:project_skeleton/presentation/create_schedule/page/create_schedule_page_two.dart';
 import 'package:project_skeleton/presentation/login/page/login_page.dart';
-import 'package:project_skeleton/presentation/single_home/page/single_home_page.dart';
 
 import 'router.gr.dart';
 
@@ -13,12 +12,17 @@ export 'router.gr.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
+<<<<<<< HEAD
     MaterialRoute(page: LoginPage, initial: true),
     MaterialRoute(page: SingleHomePage),
     MaterialRoute(page: ChooseHomePage),
     MaterialRoute(page: CreateSchedulePage),
     MaterialRoute(page: CreateSchedulePageTwo),
     MaterialRoute(page: CreateSchedulePageThree)
+=======
+
+    MaterialRoute(page:LoginPage,initial: true),
+>>>>>>> main
   ],
 )
 class $CodigeeRouter {}

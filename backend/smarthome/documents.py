@@ -20,6 +20,7 @@ class MeasurementDocument(Document):
     id = fields.IntegerField(attr='id')
     measure_value = fields.FloatField()
     measure_date = fields.DateField()
+    measure_parameter = fields.TextField()
     device = fields.ObjectField(properties={
         'name': fields.TextField(),
         'id': fields.IntegerField(attr='id'),
