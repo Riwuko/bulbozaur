@@ -172,7 +172,13 @@ class _BodyState extends State<_Body> {
             width: MediaQuery.of(context).size.width * 0.8,
             height: MediaQuery.of(context).size.height * 0.07,
             child: TextButton(
-                onPressed: () => null,
+                onPressed: () => _didTapCreate(
+                    context,
+                    widget.iconId,
+                    widget.name,
+                    widget.fromTime,
+                    widget.toTime,
+                    widget.devices),
                 child: Text("Create schedule"),
                 style: ButtonStyles.loginPageButton),
           ),

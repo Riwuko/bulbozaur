@@ -8,10 +8,11 @@ import 'package:project_skeleton/domain/use_case/core/usecase.dart';
 import 'package:project_skeleton/presentation/create_schedule/cubit/create_schedule_cubit.dart';
 
 @Injectable()
-class CheckIfLoginIsGood implements UseCase<bool, Params> {
+class CreateSchedule implements UseCase<bool, Params> {
   static const String getLogin = r"""
-mutation Mutacja($name: String!,$buildingId: int!,$timeFrom:String!,$timeTo:String!,deviceStates:Json!,token:String!){
-  createSchedule(name:$name,buildingId:$buildingId,timeFrom:$timeFrom,timeTo:$timeTo,token:$token,deviceStates:$deviceStates,token:$token){
+mutation Mutacja ($name: String!,$buildingId: ID!,$timeFrom:Time!,$timeTo:Time!,$deviceStates:[ScheduleDeviceStateInput!]!
+,$token:String!){
+  createSchedule(name:$name,buildingId:$buildingId,timeFrom:$timeFrom,timeTo:$timeTo,token:$token,devicesStates:$deviceStates){
     schedule{
       name
     }
@@ -23,15 +24,18 @@ mutation Mutacja($name: String!,$buildingId: int!,$timeFrom:String!,$timeTo:Stri
   @override
   Future<Either<Failure, bool>> call(Params params) async {
     final storage = new FlutterSecureStorage();
+    String? token = await storage.read(key: "token");
+    final val = params.devices.map((e) => e.toJson()).toList();
+    print(val);
     final QueryOptions options = QueryOptions(
       document: gql(getLogin),
       variables: <String, dynamic>{
-        'token': storage.read(key: 'token'),
+        'token': token,
         'name': params.name,
         'buildingId': params.buildingId,
         'timeFrom': params.from,
         'timeTo': params.to,
-        'devicesStates': params.devices.map((e) => e.toJson())
+        'devicesStates': params.devices.map((e) => e.toJson()).toList()
       },
     );
     final client = getClient();

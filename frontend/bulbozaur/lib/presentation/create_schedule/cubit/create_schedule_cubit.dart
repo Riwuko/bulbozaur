@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:project_skeleton/domain/entities/deviceDisplay/device_display.dart';
 import 'package:project_skeleton/domain/entities/schedule_device_state_entity/schedule_device_state_entity.dart';
 import 'package:project_skeleton/domain/getAllAboutHouse.dart';
+import 'package:project_skeleton/domain/use_case/saveSchedule.dart';
 import 'package:project_skeleton/presentation/single_home/cubit/single_home_cubit.dart';
 
 import '../../../core/base_features/base/cubit/base_cubit.dart';
@@ -13,7 +14,8 @@ part 'create_schedule_state.dart';
 @Injectable()
 class CreateScheduleCubit extends BaseCubit<CreateScheduleState> {
   GetAllAboutHouse _getAllAboutHouse;
-  CreateScheduleCubit(this._getAllAboutHouse)
+  CreateSchedule _createSchedule;
+  CreateScheduleCubit(this._getAllAboutHouse, this._createSchedule)
       : super(CreateScheduleState.initial());
 
   @override
@@ -60,6 +62,8 @@ class CreateScheduleCubit extends BaseCubit<CreateScheduleState> {
         .toList();
 
     var params = Params(idIcon, device, from, to, name, 1);
+    final result = await _createSchedule(params);
+    print(result);
   }
 }
 

@@ -47,7 +47,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   gh.factory<_i3.CheckIfLoginIsGood>(() => _i3.CheckIfLoginIsGood());
-  gh.factory<_i4.CheckIfLoginIsGood>(() => _i4.CheckIfLoginIsGood());
+  gh.factory<_i4.CreateSchedule>(() => _i4.CreateSchedule());
   gh.lazySingleton<_i5.DatabaseClient>(() => _i6.DatabaseClientImpl());
   gh.factory<_i7.FakeTemperatureRemoteDataSource>(
       () => _i7.FakeTemperatureRemoteDataSourceImpl());
@@ -71,8 +71,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i19.ClickCounterLocalDataSourceImpl(get<_i5.DatabaseClient>()));
   gh.factory<_i20.ClickCounterRepository>(() =>
       _i20.ClickCounterRepositoryImpl(get<_i19.ClickCounterLocalDataSource>()));
-  gh.factory<_i21.CreateScheduleCubit>(
-      () => _i21.CreateScheduleCubit(get<_i10.GetAllAboutHouse>()));
+  gh.factory<_i21.CreateScheduleCubit>(() => _i21.CreateScheduleCubit(
+      get<_i10.GetAllAboutHouse>(), get<_i4.CreateSchedule>()));
   gh.factory<_i22.GetClickCounterUseCase>(
       () => _i22.GetClickCounterUseCase(get<_i20.ClickCounterRepository>()));
   gh.factory<_i23.SaveClickCounterUseCase>(
