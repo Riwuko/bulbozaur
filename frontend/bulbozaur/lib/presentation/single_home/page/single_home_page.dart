@@ -10,7 +10,8 @@ import 'package:project_skeleton/core/base_features/base/page/base_page.dart';
 import 'package:project_skeleton/core/injection/injection.dart';
 import 'package:project_skeleton/core/presentation/styles/styles.dart';
 import 'package:project_skeleton/core/presentation/values/values.dart';
-import 'package:project_skeleton/domain/entities/single_home_entites/schedule_entity.dart';
+import 'package:project_skeleton/domain/entities/deviceDisplay/device_display.dart';
+import 'package:project_skeleton/domain/entities/schedule_entites/schedule_entity.dart';
 import 'package:project_skeleton/presentation/single_home/cubit/single_home_cubit.dart';
 
 class SingleHomePage extends BasePage {
@@ -18,7 +19,7 @@ class SingleHomePage extends BasePage {
   SingleHomePage(this.idOfHouse);
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (_) => getIt<SingleHomeCubit>()..init(),
+        create: (_) => getIt<SingleHomeCubit>()..start(idOfHouse),
         child: _Body(idOfHouse),
       );
 }
@@ -39,19 +40,29 @@ class _BodyState extends State<_Body> {
   final PageController controller = PageController(initialPage: 0);
 
   void _changeManual(bool value) {
-    print(manualControl);
     setState(() => manualControl = value);
     manualControl = value;
 
-    _didChangeManualControl(context, value);
-    print(manualControl);
+    _didChangeManualControl(context, value, idOfHouse);
   }
-
-  void _expansionCallback(int item, bool isExpand) {}
 
   @override
   Widget build(BuildContext context) =>
-      BlocListener<SingleHomeCubit, SingleHomeState>(
+      BlocConsumer<SingleHomeCubit, SingleHomeState>(
+        buildWhen: (p, c) => c is Displaying,
+        builder: (context, state) => state.maybeWhen(
+          orElse: () => Container(),
+          startDisplaying: (devices, schedule) => PageView(
+            scrollDirection: Axis.horizontal,
+            controller: controller,
+            children: [
+              _singleHomeFirstPage(context, manualControl, devices, schedule),
+              _statisticsHome(context),
+              _controlSchedule(context, schedule),
+              _settingsHome(context)
+            ],
+          ),
+        ),
         listener: (context, state) => state.maybeWhen(
             createSchedule: () =>
                 context.navigator.push(CreateSchedulePageRoute()),
@@ -59,26 +70,10 @@ class _BodyState extends State<_Body> {
                   child: Text("its some problems"),
                 ),
             orElse: () => Container()),
-        child: PageView(
-          scrollDirection: Axis.horizontal,
-          controller: controller,
-          children: [
-            _singleHomeFirstPage(context, manualControl),
-            _statisticsHome(context),
-            _controlSchedule(context, schedule),
-            _settingsHome(context)
-          ],
-        ),
       );
-  Widget _singleHomeFirstPage(BuildContext context, bool manualControl) {
-    var _listOfRooms = [
-      "kitchen",
-      "living room",
-      "pikachu",
-      "snorlax",
-      "charmander",
-      "rattata"
-    ];
+
+  Widget _singleHomeFirstPage(BuildContext context, bool manualControl,
+      List<deviceDisplay> devices, List<ScheduleEntity> schedule) {
     double _currentSlide = 0;
 
     return Scaffold(
@@ -104,40 +99,92 @@ class _BodyState extends State<_Body> {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: _listOfRooms.length,
+                itemCount: devices.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (BuildContext context, int index) =>
                     ExpansionPanelList(
-                      expansionCallback: (int item, bool status) {},
+                      animationDuration: Duration(milliseconds: 1000),
+                      elevation: 1,
+                      expansionCallback: (int item, bool status) {
+                        setState(() {
+                          devices[index].isExpanded = status ? false : true;
+                        });
+                        print(devices[index].isExpanded);
+                        _didChangeDevice(context, devices, schedule,
+                            devices[index].id, idOfHouse);
+                      },
                       children: [
                         ExpansionPanel(
-                          headerBuilder:
-                              (BuildContext context, bool isExpanded) => Row(
-                            children: [
-                              Container(
-                                child: SvgPicture.asset(
-                                    AppImages.svgBulbLogoCircle),
-                                margin: const EdgeInsets.only(
-                                    left: 40, right: 20, top: 20, bottom: 20),
-                              ),
-                              Container(
-                                child: Text(
-                                  _listOfRooms[index],
-                                  style: TextStyles.singleHomeNameOfRoom,
+                            headerBuilder: (BuildContext context,
+                                    bool isExpanded) =>
+                                Row(
+                                  children: [
+                                    Container(
+                                      child: SvgPicture.asset(
+                                          AppImages.svgBulbLogoCircle),
+                                      margin: const EdgeInsets.only(
+                                          left: 40,
+                                          right: 20,
+                                          top: 20,
+                                          bottom: 20),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        devices[index].name,
+                                        style: TextStyles.singleHomeNameOfRoom,
+                                      ),
+                                      margin: const EdgeInsets.only(top: 20),
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      child: Switch(
+                                        value: devices[index].isTurnOn,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            if (manualControl == false) {
+                                              devices[index].isTurnOn = value;
+                                            }
+                                          });
+                                          _didChangeDevice(
+                                              context,
+                                              devices,
+                                              schedule,
+                                              devices[index].id,
+                                              idOfHouse);
+                                        },
+                                      ),
+                                      margin: const EdgeInsets.only(
+                                          right: 50, top: 20),
+                                    )
+                                  ],
                                 ),
-                                margin: const EdgeInsets.only(top: 20),
+                            isExpanded: devices[index].isExpanded,
+                            body: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: Colors.blue,
+                                inactiveTrackColor: Colors.blue[100],
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: Colors.blueGrey,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
+                                overlayColor: Colors.red.withAlpha(32),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
                               ),
-                              Spacer(),
-                              Container(
-                                child: Switch(value: false, onChanged: null),
-                                margin:
-                                    const EdgeInsets.only(right: 50, top: 20),
-                              )
-                            ],
-                          ),
-                          isExpanded: true,
-                          body: Slider(value: _currentSlide, onChanged: null),
-                        )
+                              child: Slider(
+                                min: 0.0,
+                                max: 100.0,
+                                value: devices[index].brightness,
+                                onChanged: (value) {
+                                  setState(() {
+                                    devices[index].brightness = value;
+                                  });
+                                  _didChangeDevice(context, devices, schedule,
+                                      devices[index].id, idOfHouse);
+                                },
+                              ),
+                            ))
                       ],
                     )),
           ),
@@ -177,14 +224,8 @@ class _BodyState extends State<_Body> {
     );
   }
 
-  List<ScheduleEntity> schedule = [
-    ScheduleEntity(name: "Night", id: 1),
-    ScheduleEntity(name: "Day", id: 2),
-    ScheduleEntity(name: "Evening", id: 3)
-  ];
-
   Widget _controlSchedule(
-          BuildContext context, List<ScheduleEntity> scheduleButtons) =>
+          BuildContext context, List<ScheduleEntity> schedule) =>
       Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -206,14 +247,14 @@ class _BodyState extends State<_Body> {
                   return Container(
                     margin: const EdgeInsets.symmetric(vertical: 20.0),
                     height: 60,
-                    child: TextButton(
+                    child: ElevatedButton(
                         onPressed: () => _createControlSchedule(context),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
                               margin: const EdgeInsets.only(right: 40.0),
-                              child: Icon(_selectIcon(schedule[index].id)),
+                              child: Icon(_selectIcon(schedule[index].icon)),
                             ),
                             Text('${schedule[index].name}'),
                           ],
@@ -363,8 +404,17 @@ class _BodyState extends State<_Body> {
     }
   }
 
-  void _didChangeManualControl(BuildContext context, bool isTrue) =>
-      context.read<SingleHomeCubit>().didChangeManualControl(isTrue);
+  void _didChangeManualControl(
+          BuildContext context, bool isTrue, int buildingId) =>
+      context
+          .read<SingleHomeCubit>()
+          .didChangeManualControl(isTrue, buildingId);
+
+  void _didChangeDevice(BuildContext context, List<deviceDisplay> devices,
+          List<ScheduleEntity> schedule, String idDevices, int idHome) =>
+      context
+          .read<SingleHomeCubit>()
+          .didChangeDevice(devices, schedule, idDevices, idHome);
 
   void _createControlSchedule(BuildContext context) =>
       context.read<SingleHomeCubit>().createControlSchedule();

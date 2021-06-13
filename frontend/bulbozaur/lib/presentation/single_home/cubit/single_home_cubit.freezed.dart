@@ -27,6 +27,19 @@ class _$SingleHomeStateTearOff {
   _SingleHomeCreateSchedule createSchedule() {
     return const _SingleHomeCreateSchedule();
   }
+
+  _SingleHomeStateStartDisplaying startDisplaying(
+      {required List<deviceDisplay> device,
+      required List<ScheduleEntity> schedules}) {
+    return _SingleHomeStateStartDisplaying(
+      device: device,
+      schedules: schedules,
+    );
+  }
+
+  _SingleHomeStateCleanState cleanState() {
+    return const _SingleHomeStateCleanState();
+  }
 }
 
 /// @nodoc
@@ -39,6 +52,10 @@ mixin _$SingleHomeState {
     required TResult Function() initial,
     required TResult Function() failure,
     required TResult Function() createSchedule,
+    required TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+        startDisplaying,
+    required TResult Function() cleanState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,6 +63,10 @@ mixin _$SingleHomeState {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
+    TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+        startDisplaying,
+    TResult Function()? cleanState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +75,9 @@ mixin _$SingleHomeState {
     required TResult Function(_SingleHomeInitial value) initial,
     required TResult Function(_SingleHomeFailure value) failure,
     required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
+    required TResult Function(_SingleHomeStateStartDisplaying value)
+        startDisplaying,
+    required TResult Function(_SingleHomeStateCleanState value) cleanState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +85,8 @@ mixin _$SingleHomeState {
     TResult Function(_SingleHomeInitial value)? initial,
     TResult Function(_SingleHomeFailure value)? failure,
     TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
+    TResult Function(_SingleHomeStateStartDisplaying value)? startDisplaying,
+    TResult Function(_SingleHomeStateCleanState value)? cleanState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,6 +152,10 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
     required TResult Function() initial,
     required TResult Function() failure,
     required TResult Function() createSchedule,
+    required TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+        startDisplaying,
+    required TResult Function() cleanState,
   }) {
     return initial();
   }
@@ -136,6 +166,10 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
+    TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+        startDisplaying,
+    TResult Function()? cleanState,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -150,6 +184,9 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
     required TResult Function(_SingleHomeInitial value) initial,
     required TResult Function(_SingleHomeFailure value) failure,
     required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
+    required TResult Function(_SingleHomeStateStartDisplaying value)
+        startDisplaying,
+    required TResult Function(_SingleHomeStateCleanState value) cleanState,
   }) {
     return initial(this);
   }
@@ -160,6 +197,8 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
     TResult Function(_SingleHomeInitial value)? initial,
     TResult Function(_SingleHomeFailure value)? failure,
     TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
+    TResult Function(_SingleHomeStateStartDisplaying value)? startDisplaying,
+    TResult Function(_SingleHomeStateCleanState value)? cleanState,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -216,6 +255,10 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
     required TResult Function() initial,
     required TResult Function() failure,
     required TResult Function() createSchedule,
+    required TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+        startDisplaying,
+    required TResult Function() cleanState,
   }) {
     return failure();
   }
@@ -226,6 +269,10 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
+    TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+        startDisplaying,
+    TResult Function()? cleanState,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -240,6 +287,9 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
     required TResult Function(_SingleHomeInitial value) initial,
     required TResult Function(_SingleHomeFailure value) failure,
     required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
+    required TResult Function(_SingleHomeStateStartDisplaying value)
+        startDisplaying,
+    required TResult Function(_SingleHomeStateCleanState value) cleanState,
   }) {
     return failure(this);
   }
@@ -250,6 +300,8 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
     TResult Function(_SingleHomeInitial value)? initial,
     TResult Function(_SingleHomeFailure value)? failure,
     TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
+    TResult Function(_SingleHomeStateStartDisplaying value)? startDisplaying,
+    TResult Function(_SingleHomeStateCleanState value)? cleanState,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -307,6 +359,10 @@ class _$_SingleHomeCreateSchedule implements _SingleHomeCreateSchedule {
     required TResult Function() initial,
     required TResult Function() failure,
     required TResult Function() createSchedule,
+    required TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+        startDisplaying,
+    required TResult Function() cleanState,
   }) {
     return createSchedule();
   }
@@ -317,6 +373,10 @@ class _$_SingleHomeCreateSchedule implements _SingleHomeCreateSchedule {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
+    TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+        startDisplaying,
+    TResult Function()? cleanState,
     required TResult orElse(),
   }) {
     if (createSchedule != null) {
@@ -331,6 +391,9 @@ class _$_SingleHomeCreateSchedule implements _SingleHomeCreateSchedule {
     required TResult Function(_SingleHomeInitial value) initial,
     required TResult Function(_SingleHomeFailure value) failure,
     required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
+    required TResult Function(_SingleHomeStateStartDisplaying value)
+        startDisplaying,
+    required TResult Function(_SingleHomeStateCleanState value) cleanState,
   }) {
     return createSchedule(this);
   }
@@ -341,6 +404,8 @@ class _$_SingleHomeCreateSchedule implements _SingleHomeCreateSchedule {
     TResult Function(_SingleHomeInitial value)? initial,
     TResult Function(_SingleHomeFailure value)? failure,
     TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
+    TResult Function(_SingleHomeStateStartDisplaying value)? startDisplaying,
+    TResult Function(_SingleHomeStateCleanState value)? cleanState,
     required TResult orElse(),
   }) {
     if (createSchedule != null) {
@@ -352,4 +417,265 @@ class _$_SingleHomeCreateSchedule implements _SingleHomeCreateSchedule {
 
 abstract class _SingleHomeCreateSchedule implements SingleHomeState {
   const factory _SingleHomeCreateSchedule() = _$_SingleHomeCreateSchedule;
+}
+
+/// @nodoc
+abstract class _$SingleHomeStateStartDisplayingCopyWith<$Res> {
+  factory _$SingleHomeStateStartDisplayingCopyWith(
+          _SingleHomeStateStartDisplaying value,
+          $Res Function(_SingleHomeStateStartDisplaying) then) =
+      __$SingleHomeStateStartDisplayingCopyWithImpl<$Res>;
+  $Res call({List<deviceDisplay> device, List<ScheduleEntity> schedules});
+}
+
+/// @nodoc
+class __$SingleHomeStateStartDisplayingCopyWithImpl<$Res>
+    extends _$SingleHomeStateCopyWithImpl<$Res>
+    implements _$SingleHomeStateStartDisplayingCopyWith<$Res> {
+  __$SingleHomeStateStartDisplayingCopyWithImpl(
+      _SingleHomeStateStartDisplaying _value,
+      $Res Function(_SingleHomeStateStartDisplaying) _then)
+      : super(_value, (v) => _then(v as _SingleHomeStateStartDisplaying));
+
+  @override
+  _SingleHomeStateStartDisplaying get _value =>
+      super._value as _SingleHomeStateStartDisplaying;
+
+  @override
+  $Res call({
+    Object? device = freezed,
+    Object? schedules = freezed,
+  }) {
+    return _then(_SingleHomeStateStartDisplaying(
+      device: device == freezed
+          ? _value.device
+          : device // ignore: cast_nullable_to_non_nullable
+              as List<deviceDisplay>,
+      schedules: schedules == freezed
+          ? _value.schedules
+          : schedules // ignore: cast_nullable_to_non_nullable
+              as List<ScheduleEntity>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@Implements(Displaying)
+class _$_SingleHomeStateStartDisplaying
+    implements _SingleHomeStateStartDisplaying {
+  const _$_SingleHomeStateStartDisplaying(
+      {required this.device, required this.schedules});
+
+  @override
+  final List<deviceDisplay> device;
+  @override
+  final List<ScheduleEntity> schedules;
+
+  @override
+  String toString() {
+    return 'SingleHomeState.startDisplaying(device: $device, schedules: $schedules)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _SingleHomeStateStartDisplaying &&
+            (identical(other.device, device) ||
+                const DeepCollectionEquality().equals(other.device, device)) &&
+            (identical(other.schedules, schedules) ||
+                const DeepCollectionEquality()
+                    .equals(other.schedules, schedules)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(device) ^
+      const DeepCollectionEquality().hash(schedules);
+
+  @JsonKey(ignore: true)
+  @override
+  _$SingleHomeStateStartDisplayingCopyWith<_SingleHomeStateStartDisplaying>
+      get copyWith => __$SingleHomeStateStartDisplayingCopyWithImpl<
+          _SingleHomeStateStartDisplaying>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() failure,
+    required TResult Function() createSchedule,
+    required TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+        startDisplaying,
+    required TResult Function() cleanState,
+  }) {
+    return startDisplaying(device, schedules);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? failure,
+    TResult Function()? createSchedule,
+    TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+        startDisplaying,
+    TResult Function()? cleanState,
+    required TResult orElse(),
+  }) {
+    if (startDisplaying != null) {
+      return startDisplaying(device, schedules);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SingleHomeInitial value) initial,
+    required TResult Function(_SingleHomeFailure value) failure,
+    required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
+    required TResult Function(_SingleHomeStateStartDisplaying value)
+        startDisplaying,
+    required TResult Function(_SingleHomeStateCleanState value) cleanState,
+  }) {
+    return startDisplaying(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SingleHomeInitial value)? initial,
+    TResult Function(_SingleHomeFailure value)? failure,
+    TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
+    TResult Function(_SingleHomeStateStartDisplaying value)? startDisplaying,
+    TResult Function(_SingleHomeStateCleanState value)? cleanState,
+    required TResult orElse(),
+  }) {
+    if (startDisplaying != null) {
+      return startDisplaying(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SingleHomeStateStartDisplaying
+    implements SingleHomeState, Displaying {
+  const factory _SingleHomeStateStartDisplaying(
+          {required List<deviceDisplay> device,
+          required List<ScheduleEntity> schedules}) =
+      _$_SingleHomeStateStartDisplaying;
+
+  List<deviceDisplay> get device => throw _privateConstructorUsedError;
+  List<ScheduleEntity> get schedules => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$SingleHomeStateStartDisplayingCopyWith<_SingleHomeStateStartDisplaying>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SingleHomeStateCleanStateCopyWith<$Res> {
+  factory _$SingleHomeStateCleanStateCopyWith(_SingleHomeStateCleanState value,
+          $Res Function(_SingleHomeStateCleanState) then) =
+      __$SingleHomeStateCleanStateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SingleHomeStateCleanStateCopyWithImpl<$Res>
+    extends _$SingleHomeStateCopyWithImpl<$Res>
+    implements _$SingleHomeStateCleanStateCopyWith<$Res> {
+  __$SingleHomeStateCleanStateCopyWithImpl(_SingleHomeStateCleanState _value,
+      $Res Function(_SingleHomeStateCleanState) _then)
+      : super(_value, (v) => _then(v as _SingleHomeStateCleanState));
+
+  @override
+  _SingleHomeStateCleanState get _value =>
+      super._value as _SingleHomeStateCleanState;
+}
+
+/// @nodoc
+
+class _$_SingleHomeStateCleanState implements _SingleHomeStateCleanState {
+  const _$_SingleHomeStateCleanState();
+
+  @override
+  String toString() {
+    return 'SingleHomeState.cleanState()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _SingleHomeStateCleanState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() failure,
+    required TResult Function() createSchedule,
+    required TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+        startDisplaying,
+    required TResult Function() cleanState,
+  }) {
+    return cleanState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? failure,
+    TResult Function()? createSchedule,
+    TResult Function(
+            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+        startDisplaying,
+    TResult Function()? cleanState,
+    required TResult orElse(),
+  }) {
+    if (cleanState != null) {
+      return cleanState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SingleHomeInitial value) initial,
+    required TResult Function(_SingleHomeFailure value) failure,
+    required TResult Function(_SingleHomeCreateSchedule value) createSchedule,
+    required TResult Function(_SingleHomeStateStartDisplaying value)
+        startDisplaying,
+    required TResult Function(_SingleHomeStateCleanState value) cleanState,
+  }) {
+    return cleanState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SingleHomeInitial value)? initial,
+    TResult Function(_SingleHomeFailure value)? failure,
+    TResult Function(_SingleHomeCreateSchedule value)? createSchedule,
+    TResult Function(_SingleHomeStateStartDisplaying value)? startDisplaying,
+    TResult Function(_SingleHomeStateCleanState value)? cleanState,
+    required TResult orElse(),
+  }) {
+    if (cleanState != null) {
+      return cleanState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SingleHomeStateCleanState implements SingleHomeState {
+  const factory _SingleHomeStateCleanState() = _$_SingleHomeStateCleanState;
 }

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:project_skeleton/presentation/choose_home/page/choose_home_page.dart';
 import 'package:project_skeleton/presentation/create_schedule/page/create_schedule_page.dart';
+import 'package:project_skeleton/presentation/create_schedule/page/create_schedule_page_three.dart';
 import 'package:project_skeleton/presentation/create_schedule/page/create_schedule_page_two.dart';
 import 'package:project_skeleton/presentation/login/page/login_page.dart';
 import 'package:project_skeleton/presentation/single_home/page/single_home_page.dart';
@@ -16,7 +17,8 @@ export 'router.gr.dart';
     MaterialRoute(page: SingleHomePage),
     MaterialRoute(page: ChooseHomePage),
     MaterialRoute(page: CreateSchedulePage),
-    MaterialRoute(page: CreateSchedulePageTwo)
+    MaterialRoute(page: CreateSchedulePageTwo),
+    MaterialRoute(page: CreateSchedulePageThree)
   ],
 )
 class $CodigeeRouter {}

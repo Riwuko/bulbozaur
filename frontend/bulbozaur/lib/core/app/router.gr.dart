@@ -7,9 +7,12 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
+import '../../domain/entities/deviceDisplay/device_display.dart' as _i9;
 import '../../presentation/choose_home/page/choose_home_page.dart' as _i5;
 import '../../presentation/create_schedule/page/create_schedule_page.dart'
     as _i6;
+import '../../presentation/create_schedule/page/create_schedule_page_three.dart'
+    as _i8;
 import '../../presentation/create_schedule/page/create_schedule_page_two.dart'
     as _i7;
 import '../../presentation/login/page/login_page.dart' as _i3;
@@ -47,7 +50,19 @@ class CodigeeRouter extends _i1.RootStackRouter {
         builder: (data) {
           final args = data.argsAs<CreateSchedulePageTwoRouteArgs>();
           return _i7.CreateSchedulePageTwo(iconId: args.iconId);
-        })
+        }),
+    CreateSchedulePageThreeRoute.name: (routeData) =>
+        _i1.MaterialPageX<dynamic>(
+            routeData: routeData,
+            builder: (data) {
+              final args = data.argsAs<CreateSchedulePageThreeRouteArgs>();
+              return _i8.CreateSchedulePageThree(
+                  iconId: args.iconId,
+                  nameOfSchedule: args.nameOfSchedule,
+                  fromTime: args.fromTime,
+                  toTime: args.toTime,
+                  devices: args.devices);
+            })
   };
 
   @override
@@ -58,7 +73,9 @@ class CodigeeRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(CreateSchedulePageRoute.name,
             path: '/create-schedule-page'),
         _i1.RouteConfig(CreateSchedulePageTwoRoute.name,
-            path: '/create-schedule-page-two')
+            path: '/create-schedule-page-two'),
+        _i1.RouteConfig(CreateSchedulePageThreeRoute.name,
+            path: '/create-schedule-page-three')
       ];
 }
 
@@ -109,4 +126,43 @@ class CreateSchedulePageTwoRouteArgs {
   const CreateSchedulePageTwoRouteArgs({required this.iconId});
 
   final int iconId;
+}
+
+class CreateSchedulePageThreeRoute
+    extends _i1.PageRouteInfo<CreateSchedulePageThreeRouteArgs> {
+  CreateSchedulePageThreeRoute(
+      {required int iconId,
+      required String nameOfSchedule,
+      required String fromTime,
+      required String toTime,
+      required List<_i9.deviceDisplay> devices})
+      : super(name,
+            path: '/create-schedule-page-three',
+            args: CreateSchedulePageThreeRouteArgs(
+                iconId: iconId,
+                nameOfSchedule: nameOfSchedule,
+                fromTime: fromTime,
+                toTime: toTime,
+                devices: devices));
+
+  static const String name = 'CreateSchedulePageThreeRoute';
+}
+
+class CreateSchedulePageThreeRouteArgs {
+  const CreateSchedulePageThreeRouteArgs(
+      {required this.iconId,
+      required this.nameOfSchedule,
+      required this.fromTime,
+      required this.toTime,
+      required this.devices});
+
+  final int iconId;
+
+  final String nameOfSchedule;
+
+  final String fromTime;
+
+  final String toTime;
+
+  final List<_i9.deviceDisplay> devices;
 }

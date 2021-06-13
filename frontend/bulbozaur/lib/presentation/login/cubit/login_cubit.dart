@@ -27,6 +27,6 @@ class LoginCubit extends BaseCubit<LoginState> {
     } else {
       emit(LoginState.invalidAdress());
     }
-    emit(LoginState.loginSuccess());
+    //   emit(LoginState.loginSuccess());
   }
 }

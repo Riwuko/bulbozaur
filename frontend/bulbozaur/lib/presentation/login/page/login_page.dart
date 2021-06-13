@@ -35,10 +35,7 @@ class _BodyState extends State<_Body> {
   Widget build(BuildContext context) => BlocListener<LoginCubit, LoginState>(
         listener: (context, state) => state.maybeWhen(
             loginSuccess: () => context.navigator.push(ChooseHomePageRoute()),
-            failure: () => Container(
-                  child: Text("its some problems"),
-                ),
-            invalidAdress: () {
+            failure: () {
               final snackBar = SnackBar(
                   content: Container(
                 child: Text("Incorrect Data, please check email or password"),

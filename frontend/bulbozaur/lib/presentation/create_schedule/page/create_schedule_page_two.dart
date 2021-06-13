@@ -29,13 +29,41 @@ class _Body extends StatefulWidget {
 class _BodyState extends State<_Body> {
   final int iconId;
   final _nameController = TextEditingController();
-  final _fromTime = TextEditingController();
-  final _toTime = TextEditingController();
+  var _fromTime = TextEditingController();
+  var _toTime = TextEditingController();
+  var _selectedDataFrom = TimeOfDay(hour: 12, minute: 00);
+  var _selectedDataTo = TimeOfDay(hour: 12, minute: 00);
+
+  Future<void> _selectTimeFrom(
+      BuildContext context, var _selectData, var controller) async {
+    final picked = (await showTimePicker(
+      context: context,
+      initialTime: _selectData,
+    ));
+    if (picked != null && picked != _selectData)
+      setState(() {
+        _selectData = picked;
+        controller.text = "${_selectData.hour} : ${_selectData.minute}";
+      });
+  }
 
   _BodyState(this.iconId);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => BlocListener<CreateScheduleCubit,
+          CreateScheduleState>(
+      listener: (context, state) => state.maybeWhen(
+            orElse: () => print(""),
+            choosedTime: (idIcon, name, from, to, devices) =>
+                context.navigator.push(CreateSchedulePageThreeRoute(
+              iconId: idIcon,
+              fromTime: from,
+              nameOfSchedule: name,
+              toTime: to,
+              devices: devices,
+            )),
+          ),
+      child: Scaffold(
           body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -73,11 +101,14 @@ class _BodyState extends State<_Body> {
                     height: MediaQuery.of(context).size.height * 0.30,
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: TextFormField(
+                      onTap: () => _selectTimeFrom(
+                          context, _selectedDataFrom, _fromTime),
                       controller: _fromTime,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           filled: true,
-                          hintText: "Hour From",
+                          hintText:
+                              "${_selectedDataFrom.hour} : ${_selectedDataFrom.minute}",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: AppColors.white),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -89,11 +120,14 @@ class _BodyState extends State<_Body> {
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width * 0.35,
                     child: TextFormField(
+                      onTap: () =>
+                          _selectTimeFrom(context, _selectedDataFrom, _toTime),
                       controller: _toTime,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           filled: true,
-                          hintText: "Hour To",
+                          hintText:
+                              "${_selectedDataTo.hour} : ${_selectedDataTo.minute}",
                           border: OutlineInputBorder(
                             borderSide: BorderSide(color: AppColors.white),
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -115,7 +149,7 @@ class _BodyState extends State<_Body> {
             ],
           ),
         ),
-      ));
+      )));
   void _didTapNextButton(BuildContext context, int idIcon, String name,
           String from, String to) =>
       context

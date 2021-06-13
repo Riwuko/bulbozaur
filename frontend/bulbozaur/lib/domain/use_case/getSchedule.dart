@@ -4,26 +4,40 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:project_skeleton/domain/entities/devices_entities/devices_entity.dart';
+import 'package:project_skeleton/domain/entities/schedule_entites/schedule_entity.dart';
 import 'package:project_skeleton/domain/use_case/graphQl_get_client.dart';
 
 import 'package:project_skeleton/domain/use_case/core/usecase.dart';
 
 @Injectable()
-class GetAllAboutHouse extends UseCase<List<DeviceEntity>, int> {
+class GetSchedule extends UseCase<List<ScheduleEntity>, void> {
   static const String getDevices = r"""
-query actuatingDevices($token:String!,$id:Int!)
+query schedules($token:String!,$id:Int!)
 {
-actuatingDevices(building_Id:$id,token:$token){
+schedules(building_Id:$id,token:$token){
   id
   name
+  icon
+  building{
+    id
+    name
+  }
+  scheduleDevicesStates{
+    device{
+      id
+      name
+    }
+    state
+    stateValue
+  }
+  
 }
 }
  """;
 
   @override
-  Future<Either<Failure, List<DeviceEntity>>> call(int id) async {
-    print(id);
+  Future<Either<Failure, List<ScheduleEntity>>> call([noParams]) async {
+    int id = 1;
     final storage = new FlutterSecureStorage();
     String? token = await storage.read(key: "token");
     final QueryOptions options = QueryOptions(
@@ -39,14 +53,15 @@ actuatingDevices(building_Id:$id,token:$token){
       return Left(Failure.invalidParameter());
     } else {
       print(result.data.toString());
-      final path = ((result.data!['actuatingDevices']));
+      final path = ((result.data!['schedules']));
       print(path);
+      // return Right(true);
 
-      List<DeviceEntity> buildings =
-          List<DeviceEntity>.from((path).map((e) => DeviceEntity.fromJson(e)))
-              .toList();
-      print(buildings);
-      return Right(buildings);
+      List<ScheduleEntity> schedule = List<ScheduleEntity>.from(
+          (path).map((e) => ScheduleEntity.fromJson(e))).toList();
+      print(schedule);
+
+      return Right(schedule);
     }
   }
 }

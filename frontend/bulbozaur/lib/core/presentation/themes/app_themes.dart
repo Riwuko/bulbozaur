@@ -16,16 +16,16 @@ abstract class Themes {
   );
 
   static final _colorScheme = const ColorScheme.light().copyWith(
-    primary: Colors.white,
+    primary: Colors.blue,
     primaryVariant: Colors.blueAccent,
     secondary: Colors.red,
     secondaryVariant: Colors.red,
     background: AppColors.white,
     surface: Colors.white,
     error: Colors.redAccent,
-    onPrimary: Colors.white,
-    onSecondary: Colors.white,
-    onBackground: Colors.white,
+    onPrimary: Colors.blue,
+    onSecondary: Colors.blue,
+    onBackground: Colors.blue,
     onSurface: Colors.black,
     onError: Colors.white,
   );

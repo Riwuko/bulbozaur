@@ -8,14 +8,33 @@ part of 'mqtt_client.dart';
 
 message _$messageFromJson(Map<String, dynamic> json) {
   return message(
-    json['brightness'] as int,
-    json['turn'] as String,
-    json['white'] as int,
+    json['state'] as String,
+    (json['lightValue'] as num).toDouble(),
+    (json['stateValue'] as num).toDouble(),
+    json['buildingId'] as int,
+    json['bulbId'] as int,
   );
 }
 
 Map<String, dynamic> _$messageToJson(message instance) => <String, dynamic>{
-      'brightness': instance.brightness,
-      'turn': instance.turn,
-      'white': instance.white,
+      'stateValue': instance.stateValue,
+      'state': instance.state,
+      'lightValue': instance.lightValue,
+      'buildingId': instance.buildingId,
+      'bulbId': instance.bulbId,
+    };
+
+changeMode _$changeModeFromJson(Map<String, dynamic> json) {
+  return changeMode(
+    json['mode'] as String,
+    json['buildingId'] as int,
+    json['bulbId'] as int,
+  );
+}
+
+Map<String, dynamic> _$changeModeToJson(changeMode instance) =>
+    <String, dynamic>{
+      'mode': instance.mode,
+      'buildingId': instance.buildingId,
+      'bulbId': instance.bulbId,
     };

@@ -35,16 +35,32 @@ class MqttSendingSignal {
     await log();
   }
 
-  Future<void> publishMessage(int brightness, String isOn) async {
+  Future<void> publishMessageMode(
+      String mode, int buildingId, int idLight) async {
     /// int array
     Uint8Buffer uint8buffer = Uint8Buffer();
-    var result = message(brightness, isOn, 10);
+    publishTopic = "bulb/mode";
+    var result = changeMode(mode, buildingId, idLight);
     var msg1 = result.toJson();
     var msg = json.encode(msg1);
 
     /// string turn into String.getBytes int array similar to the java?
     var codeUnits = msg.codeUnits;
-    //uint8buffer.add()
+    uint8buffer.addAll(codeUnits);
+    mqttClient.publishMessage(publishTopic, qos, uint8buffer);
+  }
+
+  Future<void> publishMessageParameters(String state, int buildingId,
+      double stateValue, double lightValue, int bulbId) async {
+    /// int array
+    Uint8Buffer uint8buffer = Uint8Buffer();
+    publishTopic = "bulb/mode";
+    var result = message(state, lightValue, stateValue, buildingId, bulbId);
+    var msg1 = result.toJson();
+    var msg = json.encode(msg1);
+
+    /// string turn into String.getBytes int array similar to the java?
+    var codeUnits = msg.codeUnits;
     uint8buffer.addAll(codeUnits);
     mqttClient.publishMessage(publishTopic, qos, uint8buffer);
   }
@@ -63,7 +79,7 @@ class MqttSendingSignal {
 
   _onConnected() {
     _log("_onConnected");
-    publishMessage(80, "on");
+    // publishMessage(80, "on");
 
     /// when the connection is successful subscription news
     mqttClient.subscribe(subTopic, qos);
@@ -105,11 +121,25 @@ class MqttSendingSignal {
 
 @JsonSerializable()
 class message {
-  int brightness = 50;
-  String turn = "on";
-  int white = 0;
+  double stateValue;
+  String state;
+  double lightValue;
+  int buildingId;
+  int bulbId;
 
-  message(this.brightness, this.turn, this.white);
+  message(this.state, this.lightValue, this.stateValue, this.buildingId,
+      this.bulbId);
 
   Map<String, dynamic> toJson() => _$messageToJson(this);
+}
+
+@JsonSerializable()
+class changeMode {
+  String mode;
+  int buildingId;
+  int bulbId;
+
+  changeMode(this.mode, this.buildingId, this.bulbId);
+
+  Map<String, dynamic> toJson() => _$changeModeToJson(this);
 }

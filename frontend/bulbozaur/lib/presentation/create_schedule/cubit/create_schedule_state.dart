@@ -8,4 +8,11 @@ class CreateScheduleState with _$CreateScheduleState {
 
   const factory CreateScheduleState.choosedIcon({required int id}) =
       _CreateScheduleChoosedIcon;
+
+  const factory CreateScheduleState.choosedTime(
+      {required int id,
+      required String name,
+      required String fromTime,
+      required String toTime,
+      required List<deviceDisplay> device}) = _CreateScheduleStateChoosedTime;
 }
