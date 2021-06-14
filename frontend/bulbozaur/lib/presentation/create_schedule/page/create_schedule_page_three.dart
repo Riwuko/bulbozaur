@@ -55,136 +55,147 @@ class _BodyState extends State<_Body> {
       _didChangeManualControl(context, value);
     }
 
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 40),
-            child: Text("Add schedule",
-                style: TextStyles.singleHomeManual.copyWith(fontSize: 40.0)),
-          ),
-          Text("Choos lights",
-              style: TextStyles.singleHomeNameOfRoom.copyWith(fontSize: 20.0)),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 15.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("Manual control", style: TextStyles.singleHomeManual),
-                Switch(
-                  value: manualControl,
-                  onChanged: (bool value) => _changeManual(value),
-                  activeTrackColor: Colors.blueGrey,
-                  activeColor: Colors.blue,
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: widget.devices.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (BuildContext context, int index) =>
-                    ExpansionPanelList(
-                      animationDuration: Duration(milliseconds: 1000),
-                      elevation: 1,
-                      expansionCallback: (int item, bool status) {
-                        setState(() {
-                          widget.devices[index].isExpanded =
-                              status ? false : true;
-                        });
-                        print(widget.devices[index].isExpanded);
-                        _didChangeDevice(context, widget.devices);
-                      },
-                      children: [
-                        ExpansionPanel(
-                            headerBuilder: (BuildContext context,
-                                    bool isExpanded) =>
-                                Row(
-                                  children: [
-                                    Container(
-                                      child: SvgPicture.asset(
-                                          AppImages.svgBulbLogoCircle),
-                                      margin: const EdgeInsets.only(
-                                          left: 40,
-                                          right: 20,
-                                          top: 20,
-                                          bottom: 20),
+    return BlocListener<CreateScheduleCubit, CreateScheduleState>(
+        listener: (context, state) => state.maybeWhen(
+            orElse: () => print(""),
+            success: () =>
+                context.navigator.push(SingleHomePageRoute(idOfHouse: 0))),
+        child: Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 40),
+                child: Text("Add schedule",
+                    style:
+                        TextStyles.singleHomeManual.copyWith(fontSize: 40.0)),
+              ),
+              Text("Choos lights",
+                  style:
+                      TextStyles.singleHomeNameOfRoom.copyWith(fontSize: 20.0)),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Manual control", style: TextStyles.singleHomeManual),
+                    Switch(
+                      value: manualControl,
+                      onChanged: (bool value) => _changeManual(value),
+                      activeTrackColor: Colors.blueGrey,
+                      activeColor: Colors.blue,
+                    )
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: widget.devices.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (BuildContext context, int index) =>
+                        ExpansionPanelList(
+                          animationDuration: Duration(milliseconds: 1000),
+                          elevation: 1,
+                          expansionCallback: (int item, bool status) {
+                            setState(() {
+                              widget.devices[index].isExpanded =
+                                  status ? false : true;
+                            });
+                            print(widget.devices[index].isExpanded);
+                            _didChangeDevice(context, widget.devices);
+                          },
+                          children: [
+                            ExpansionPanel(
+                                headerBuilder: (BuildContext context,
+                                        bool isExpanded) =>
+                                    Row(
+                                      children: [
+                                        Container(
+                                          child: SvgPicture.asset(
+                                              AppImages.svgBulbLogoCircle),
+                                          margin: const EdgeInsets.only(
+                                              left: 40,
+                                              right: 20,
+                                              top: 20,
+                                              bottom: 20),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            widget.devices[index].name,
+                                            style:
+                                                TextStyles.singleHomeNameOfRoom,
+                                          ),
+                                          margin:
+                                              const EdgeInsets.only(top: 20),
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          child: Switch(
+                                            value:
+                                                widget.devices[index].isTurnOn,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                widget.devices[index].isTurnOn =
+                                                    value;
+                                              });
+                                              _didChangeDevice(
+                                                  context, widget.devices);
+                                            },
+                                          ),
+                                          margin: const EdgeInsets.only(
+                                              right: 50, top: 20),
+                                        )
+                                      ],
                                     ),
-                                    Container(
-                                      child: Text(
-                                        widget.devices[index].name,
-                                        style: TextStyles.singleHomeNameOfRoom,
-                                      ),
-                                      margin: const EdgeInsets.only(top: 20),
-                                    ),
-                                    Spacer(),
-                                    Container(
-                                      child: Switch(
-                                        value: widget.devices[index].isTurnOn,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            widget.devices[index].isTurnOn =
-                                                value;
-                                          });
-                                          _didChangeDevice(
-                                              context, widget.devices);
-                                        },
-                                      ),
-                                      margin: const EdgeInsets.only(
-                                          right: 50, top: 20),
-                                    )
-                                  ],
-                                ),
-                            isExpanded: widget.devices[index].isExpanded,
-                            body: SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: Colors.blue,
-                                inactiveTrackColor: Colors.blue[100],
-                                trackShape: RectangularSliderTrackShape(),
-                                trackHeight: 4.0,
-                                thumbColor: Colors.blueGrey,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 12.0),
-                                overlayColor: Colors.red.withAlpha(32),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 28.0),
-                              ),
-                              child: Slider(
-                                min: 0.0,
-                                max: 100.0,
-                                value: widget.devices[index].brightness,
-                                onChanged: (value) {
-                                  setState(() {
-                                    widget.devices[index].brightness = value;
-                                  });
-                                  _didChangeDevice(context, widget.devices);
-                                },
-                              ),
-                            ))
-                      ],
-                    )),
+                                isExpanded: widget.devices[index].isExpanded,
+                                body: SliderTheme(
+                                  data: SliderTheme.of(context).copyWith(
+                                    activeTrackColor: Colors.blue,
+                                    inactiveTrackColor: Colors.blue[100],
+                                    trackShape: RectangularSliderTrackShape(),
+                                    trackHeight: 4.0,
+                                    thumbColor: Colors.blueGrey,
+                                    thumbShape: RoundSliderThumbShape(
+                                        enabledThumbRadius: 12.0),
+                                    overlayColor: Colors.red.withAlpha(32),
+                                    overlayShape: RoundSliderOverlayShape(
+                                        overlayRadius: 28.0),
+                                  ),
+                                  child: Slider(
+                                    min: 0.0,
+                                    max: 100.0,
+                                    value: widget.devices[index].brightness,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        widget.devices[index].brightness =
+                                            value;
+                                      });
+                                      _didChangeDevice(context, widget.devices);
+                                    },
+                                  ),
+                                ))
+                          ],
+                        )),
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 40.0),
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.07,
+                child: TextButton(
+                    onPressed: () => _didTapCreate(
+                        context,
+                        widget.iconId,
+                        widget.name,
+                        widget.fromTime,
+                        widget.toTime,
+                        widget.devices),
+                    child: Text("Create schedule"),
+                    style: ButtonStyles.loginPageButton),
+              ),
+            ],
           ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 40.0),
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.height * 0.07,
-            child: TextButton(
-                onPressed: () => _didTapCreate(
-                    context,
-                    widget.iconId,
-                    widget.name,
-                    widget.fromTime,
-                    widget.toTime,
-                    widget.devices),
-                child: Text("Create schedule"),
-                style: ButtonStyles.loginPageButton),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   void _didTapCreate(BuildContext context, int idIcon, String name, String from,

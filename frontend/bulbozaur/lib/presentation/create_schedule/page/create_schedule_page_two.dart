@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_skeleton/core/base_features/base/page/base_page.dart';
+import 'package:project_skeleton/core/base_features/base/page/base_page.dart';
 import 'package:project_skeleton/core/injection/injection.dart';
 import 'package:project_skeleton/core/presentation/styles/styles.dart';
 import 'package:project_skeleton/core/presentation/values/values.dart';

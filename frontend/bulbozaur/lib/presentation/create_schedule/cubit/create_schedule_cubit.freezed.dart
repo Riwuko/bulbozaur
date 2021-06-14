@@ -44,6 +44,10 @@ class _$CreateScheduleStateTearOff {
       device: device,
     );
   }
+
+  _CreateScheduleStateSuccess success() {
+    return const _CreateScheduleStateSuccess();
+  }
 }
 
 /// @nodoc
@@ -59,6 +63,7 @@ mixin _$CreateScheduleState {
     required TResult Function(int id, String name, String fromTime,
             String toTime, List<deviceDisplay> device)
         choosedTime,
+    required TResult Function() success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$CreateScheduleState {
     TResult Function(int id, String name, String fromTime, String toTime,
             List<deviceDisplay> device)?
         choosedTime,
+    TResult Function()? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,6 +85,7 @@ mixin _$CreateScheduleState {
     required TResult Function(_CreateScheduleChoosedIcon value) choosedIcon,
     required TResult Function(_CreateScheduleStateChoosedTime value)
         choosedTime,
+    required TResult Function(_CreateScheduleStateSuccess value) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +94,7 @@ mixin _$CreateScheduleState {
     TResult Function(_CreateScheduleStateFailure value)? failure,
     TResult Function(_CreateScheduleChoosedIcon value)? choosedIcon,
     TResult Function(_CreateScheduleStateChoosedTime value)? choosedTime,
+    TResult Function(_CreateScheduleStateSuccess value)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -157,6 +165,7 @@ class _$_CreateScheduleStateInitial implements _CreateScheduleStateInitial {
     required TResult Function(int id, String name, String fromTime,
             String toTime, List<deviceDisplay> device)
         choosedTime,
+    required TResult Function() success,
   }) {
     return initial();
   }
@@ -170,6 +179,7 @@ class _$_CreateScheduleStateInitial implements _CreateScheduleStateInitial {
     TResult Function(int id, String name, String fromTime, String toTime,
             List<deviceDisplay> device)?
         choosedTime,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -186,6 +196,7 @@ class _$_CreateScheduleStateInitial implements _CreateScheduleStateInitial {
     required TResult Function(_CreateScheduleChoosedIcon value) choosedIcon,
     required TResult Function(_CreateScheduleStateChoosedTime value)
         choosedTime,
+    required TResult Function(_CreateScheduleStateSuccess value) success,
   }) {
     return initial(this);
   }
@@ -197,6 +208,7 @@ class _$_CreateScheduleStateInitial implements _CreateScheduleStateInitial {
     TResult Function(_CreateScheduleStateFailure value)? failure,
     TResult Function(_CreateScheduleChoosedIcon value)? choosedIcon,
     TResult Function(_CreateScheduleStateChoosedTime value)? choosedTime,
+    TResult Function(_CreateScheduleStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -258,6 +270,7 @@ class _$_CreateScheduleStateFailure implements _CreateScheduleStateFailure {
     required TResult Function(int id, String name, String fromTime,
             String toTime, List<deviceDisplay> device)
         choosedTime,
+    required TResult Function() success,
   }) {
     return failure();
   }
@@ -271,6 +284,7 @@ class _$_CreateScheduleStateFailure implements _CreateScheduleStateFailure {
     TResult Function(int id, String name, String fromTime, String toTime,
             List<deviceDisplay> device)?
         choosedTime,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -287,6 +301,7 @@ class _$_CreateScheduleStateFailure implements _CreateScheduleStateFailure {
     required TResult Function(_CreateScheduleChoosedIcon value) choosedIcon,
     required TResult Function(_CreateScheduleStateChoosedTime value)
         choosedTime,
+    required TResult Function(_CreateScheduleStateSuccess value) success,
   }) {
     return failure(this);
   }
@@ -298,6 +313,7 @@ class _$_CreateScheduleStateFailure implements _CreateScheduleStateFailure {
     TResult Function(_CreateScheduleStateFailure value)? failure,
     TResult Function(_CreateScheduleChoosedIcon value)? choosedIcon,
     TResult Function(_CreateScheduleStateChoosedTime value)? choosedTime,
+    TResult Function(_CreateScheduleStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -385,6 +401,7 @@ class _$_CreateScheduleChoosedIcon implements _CreateScheduleChoosedIcon {
     required TResult Function(int id, String name, String fromTime,
             String toTime, List<deviceDisplay> device)
         choosedTime,
+    required TResult Function() success,
   }) {
     return choosedIcon(id);
   }
@@ -398,6 +415,7 @@ class _$_CreateScheduleChoosedIcon implements _CreateScheduleChoosedIcon {
     TResult Function(int id, String name, String fromTime, String toTime,
             List<deviceDisplay> device)?
         choosedTime,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (choosedIcon != null) {
@@ -414,6 +432,7 @@ class _$_CreateScheduleChoosedIcon implements _CreateScheduleChoosedIcon {
     required TResult Function(_CreateScheduleChoosedIcon value) choosedIcon,
     required TResult Function(_CreateScheduleStateChoosedTime value)
         choosedTime,
+    required TResult Function(_CreateScheduleStateSuccess value) success,
   }) {
     return choosedIcon(this);
   }
@@ -425,6 +444,7 @@ class _$_CreateScheduleChoosedIcon implements _CreateScheduleChoosedIcon {
     TResult Function(_CreateScheduleStateFailure value)? failure,
     TResult Function(_CreateScheduleChoosedIcon value)? choosedIcon,
     TResult Function(_CreateScheduleStateChoosedTime value)? choosedTime,
+    TResult Function(_CreateScheduleStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (choosedIcon != null) {
@@ -572,6 +592,7 @@ class _$_CreateScheduleStateChoosedTime
     required TResult Function(int id, String name, String fromTime,
             String toTime, List<deviceDisplay> device)
         choosedTime,
+    required TResult Function() success,
   }) {
     return choosedTime(id, name, fromTime, toTime, device);
   }
@@ -585,6 +606,7 @@ class _$_CreateScheduleStateChoosedTime
     TResult Function(int id, String name, String fromTime, String toTime,
             List<deviceDisplay> device)?
         choosedTime,
+    TResult Function()? success,
     required TResult orElse(),
   }) {
     if (choosedTime != null) {
@@ -601,6 +623,7 @@ class _$_CreateScheduleStateChoosedTime
     required TResult Function(_CreateScheduleChoosedIcon value) choosedIcon,
     required TResult Function(_CreateScheduleStateChoosedTime value)
         choosedTime,
+    required TResult Function(_CreateScheduleStateSuccess value) success,
   }) {
     return choosedTime(this);
   }
@@ -612,6 +635,7 @@ class _$_CreateScheduleStateChoosedTime
     TResult Function(_CreateScheduleStateFailure value)? failure,
     TResult Function(_CreateScheduleChoosedIcon value)? choosedIcon,
     TResult Function(_CreateScheduleStateChoosedTime value)? choosedTime,
+    TResult Function(_CreateScheduleStateSuccess value)? success,
     required TResult orElse(),
   }) {
     if (choosedTime != null) {
@@ -637,4 +661,109 @@ abstract class _CreateScheduleStateChoosedTime implements CreateScheduleState {
   @JsonKey(ignore: true)
   _$CreateScheduleStateChoosedTimeCopyWith<_CreateScheduleStateChoosedTime>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$CreateScheduleStateSuccessCopyWith<$Res> {
+  factory _$CreateScheduleStateSuccessCopyWith(
+          _CreateScheduleStateSuccess value,
+          $Res Function(_CreateScheduleStateSuccess) then) =
+      __$CreateScheduleStateSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$CreateScheduleStateSuccessCopyWithImpl<$Res>
+    extends _$CreateScheduleStateCopyWithImpl<$Res>
+    implements _$CreateScheduleStateSuccessCopyWith<$Res> {
+  __$CreateScheduleStateSuccessCopyWithImpl(_CreateScheduleStateSuccess _value,
+      $Res Function(_CreateScheduleStateSuccess) _then)
+      : super(_value, (v) => _then(v as _CreateScheduleStateSuccess));
+
+  @override
+  _CreateScheduleStateSuccess get _value =>
+      super._value as _CreateScheduleStateSuccess;
+}
+
+/// @nodoc
+
+class _$_CreateScheduleStateSuccess implements _CreateScheduleStateSuccess {
+  const _$_CreateScheduleStateSuccess();
+
+  @override
+  String toString() {
+    return 'CreateScheduleState.success()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _CreateScheduleStateSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() failure,
+    required TResult Function(int id) choosedIcon,
+    required TResult Function(int id, String name, String fromTime,
+            String toTime, List<deviceDisplay> device)
+        choosedTime,
+    required TResult Function() success,
+  }) {
+    return success();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? failure,
+    TResult Function(int id)? choosedIcon,
+    TResult Function(int id, String name, String fromTime, String toTime,
+            List<deviceDisplay> device)?
+        choosedTime,
+    TResult Function()? success,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CreateScheduleStateInitial value) initial,
+    required TResult Function(_CreateScheduleStateFailure value) failure,
+    required TResult Function(_CreateScheduleChoosedIcon value) choosedIcon,
+    required TResult Function(_CreateScheduleStateChoosedTime value)
+        choosedTime,
+    required TResult Function(_CreateScheduleStateSuccess value) success,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CreateScheduleStateInitial value)? initial,
+    TResult Function(_CreateScheduleStateFailure value)? failure,
+    TResult Function(_CreateScheduleChoosedIcon value)? choosedIcon,
+    TResult Function(_CreateScheduleStateChoosedTime value)? choosedTime,
+    TResult Function(_CreateScheduleStateSuccess value)? success,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateScheduleStateSuccess implements CreateScheduleState {
+  const factory _CreateScheduleStateSuccess() = _$_CreateScheduleStateSuccess;
 }

@@ -20,10 +20,16 @@ DeviceEntity _$DeviceEntityFromJson(Map<String, dynamic> json) {
 class _$DeviceEntityTearOff {
   const _$DeviceEntityTearOff();
 
-  _DeviceEntity call({required String name, required String id}) {
+  _DeviceEntity call(
+      {required String name,
+      required String id,
+      required String stateValue,
+      required bool state}) {
     return _DeviceEntity(
       name: name,
       id: id,
+      stateValue: stateValue,
+      state: state,
     );
   }
 
@@ -39,6 +45,8 @@ const $DeviceEntity = _$DeviceEntityTearOff();
 mixin _$DeviceEntity {
   String get name => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  String get stateValue => throw _privateConstructorUsedError;
+  bool get state => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +59,7 @@ abstract class $DeviceEntityCopyWith<$Res> {
   factory $DeviceEntityCopyWith(
           DeviceEntity value, $Res Function(DeviceEntity) then) =
       _$DeviceEntityCopyWithImpl<$Res>;
-  $Res call({String name, String id});
+  $Res call({String name, String id, String stateValue, bool state});
 }
 
 /// @nodoc
@@ -66,6 +74,8 @@ class _$DeviceEntityCopyWithImpl<$Res> implements $DeviceEntityCopyWith<$Res> {
   $Res call({
     Object? name = freezed,
     Object? id = freezed,
+    Object? stateValue = freezed,
+    Object? state = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -76,6 +86,14 @@ class _$DeviceEntityCopyWithImpl<$Res> implements $DeviceEntityCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      stateValue: stateValue == freezed
+          ? _value.stateValue
+          : stateValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -87,7 +105,7 @@ abstract class _$DeviceEntityCopyWith<$Res>
           _DeviceEntity value, $Res Function(_DeviceEntity) then) =
       __$DeviceEntityCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String id});
+  $Res call({String name, String id, String stateValue, bool state});
 }
 
 /// @nodoc
@@ -104,6 +122,8 @@ class __$DeviceEntityCopyWithImpl<$Res> extends _$DeviceEntityCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? id = freezed,
+    Object? stateValue = freezed,
+    Object? state = freezed,
   }) {
     return _then(_DeviceEntity(
       name: name == freezed
@@ -114,6 +134,14 @@ class __$DeviceEntityCopyWithImpl<$Res> extends _$DeviceEntityCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      stateValue: stateValue == freezed
+          ? _value.stateValue
+          : stateValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -121,7 +149,11 @@ class __$DeviceEntityCopyWithImpl<$Res> extends _$DeviceEntityCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_DeviceEntity implements _DeviceEntity {
-  _$_DeviceEntity({required this.name, required this.id});
+  _$_DeviceEntity(
+      {required this.name,
+      required this.id,
+      required this.stateValue,
+      required this.state});
 
   factory _$_DeviceEntity.fromJson(Map<String, dynamic> json) =>
       _$_$_DeviceEntityFromJson(json);
@@ -130,10 +162,14 @@ class _$_DeviceEntity implements _DeviceEntity {
   final String name;
   @override
   final String id;
+  @override
+  final String stateValue;
+  @override
+  final bool state;
 
   @override
   String toString() {
-    return 'DeviceEntity(name: $name, id: $id)';
+    return 'DeviceEntity(name: $name, id: $id, stateValue: $stateValue, state: $state)';
   }
 
   @override
@@ -143,14 +179,21 @@ class _$_DeviceEntity implements _DeviceEntity {
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)));
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.stateValue, stateValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.stateValue, stateValue)) &&
+            (identical(other.state, state) ||
+                const DeepCollectionEquality().equals(other.state, state)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(id);
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(stateValue) ^
+      const DeepCollectionEquality().hash(state);
 
   @JsonKey(ignore: true)
   @override
@@ -164,8 +207,11 @@ class _$_DeviceEntity implements _DeviceEntity {
 }
 
 abstract class _DeviceEntity implements DeviceEntity {
-  factory _DeviceEntity({required String name, required String id}) =
-      _$_DeviceEntity;
+  factory _DeviceEntity(
+      {required String name,
+      required String id,
+      required String stateValue,
+      required bool state}) = _$_DeviceEntity;
 
   factory _DeviceEntity.fromJson(Map<String, dynamic> json) =
       _$_DeviceEntity.fromJson;
@@ -174,6 +220,10 @@ abstract class _DeviceEntity implements DeviceEntity {
   String get name => throw _privateConstructorUsedError;
   @override
   String get id => throw _privateConstructorUsedError;
+  @override
+  String get stateValue => throw _privateConstructorUsedError;
+  @override
+  bool get state => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DeviceEntityCopyWith<_DeviceEntity> get copyWith =>

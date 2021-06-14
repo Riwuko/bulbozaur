@@ -24,13 +24,15 @@ class _$ScheduleDeviceStateEntityTearOff {
   _ScheduleDeviceStateEntity call(
       {required bool state,
       required int device,
-      required int lightValue,
-      required double stateValue}) {
+      required int lightLevel,
+      required double stateValue,
+      required int icon}) {
     return _ScheduleDeviceStateEntity(
       state: state,
       device: device,
-      lightValue: lightValue,
+      lightLevel: lightLevel,
       stateValue: stateValue,
+      icon: icon,
     );
   }
 
@@ -46,8 +48,9 @@ const $ScheduleDeviceStateEntity = _$ScheduleDeviceStateEntityTearOff();
 mixin _$ScheduleDeviceStateEntity {
   bool get state => throw _privateConstructorUsedError;
   int get device => throw _privateConstructorUsedError;
-  int get lightValue => throw _privateConstructorUsedError;
+  int get lightLevel => throw _privateConstructorUsedError;
   double get stateValue => throw _privateConstructorUsedError;
+  int get icon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,7 +63,8 @@ abstract class $ScheduleDeviceStateEntityCopyWith<$Res> {
   factory $ScheduleDeviceStateEntityCopyWith(ScheduleDeviceStateEntity value,
           $Res Function(ScheduleDeviceStateEntity) then) =
       _$ScheduleDeviceStateEntityCopyWithImpl<$Res>;
-  $Res call({bool state, int device, int lightValue, double stateValue});
+  $Res call(
+      {bool state, int device, int lightLevel, double stateValue, int icon});
 }
 
 /// @nodoc
@@ -76,8 +80,9 @@ class _$ScheduleDeviceStateEntityCopyWithImpl<$Res>
   $Res call({
     Object? state = freezed,
     Object? device = freezed,
-    Object? lightValue = freezed,
+    Object? lightLevel = freezed,
     Object? stateValue = freezed,
+    Object? icon = freezed,
   }) {
     return _then(_value.copyWith(
       state: state == freezed
@@ -88,14 +93,18 @@ class _$ScheduleDeviceStateEntityCopyWithImpl<$Res>
           ? _value.device
           : device // ignore: cast_nullable_to_non_nullable
               as int,
-      lightValue: lightValue == freezed
-          ? _value.lightValue
-          : lightValue // ignore: cast_nullable_to_non_nullable
+      lightLevel: lightLevel == freezed
+          ? _value.lightLevel
+          : lightLevel // ignore: cast_nullable_to_non_nullable
               as int,
       stateValue: stateValue == freezed
           ? _value.stateValue
           : stateValue // ignore: cast_nullable_to_non_nullable
               as double,
+      icon: icon == freezed
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -107,7 +116,8 @@ abstract class _$ScheduleDeviceStateEntityCopyWith<$Res>
           $Res Function(_ScheduleDeviceStateEntity) then) =
       __$ScheduleDeviceStateEntityCopyWithImpl<$Res>;
   @override
-  $Res call({bool state, int device, int lightValue, double stateValue});
+  $Res call(
+      {bool state, int device, int lightLevel, double stateValue, int icon});
 }
 
 /// @nodoc
@@ -126,8 +136,9 @@ class __$ScheduleDeviceStateEntityCopyWithImpl<$Res>
   $Res call({
     Object? state = freezed,
     Object? device = freezed,
-    Object? lightValue = freezed,
+    Object? lightLevel = freezed,
     Object? stateValue = freezed,
+    Object? icon = freezed,
   }) {
     return _then(_ScheduleDeviceStateEntity(
       state: state == freezed
@@ -138,14 +149,18 @@ class __$ScheduleDeviceStateEntityCopyWithImpl<$Res>
           ? _value.device
           : device // ignore: cast_nullable_to_non_nullable
               as int,
-      lightValue: lightValue == freezed
-          ? _value.lightValue
-          : lightValue // ignore: cast_nullable_to_non_nullable
+      lightLevel: lightLevel == freezed
+          ? _value.lightLevel
+          : lightLevel // ignore: cast_nullable_to_non_nullable
               as int,
       stateValue: stateValue == freezed
           ? _value.stateValue
           : stateValue // ignore: cast_nullable_to_non_nullable
               as double,
+      icon: icon == freezed
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -156,8 +171,9 @@ class _$_ScheduleDeviceStateEntity implements _ScheduleDeviceStateEntity {
   _$_ScheduleDeviceStateEntity(
       {required this.state,
       required this.device,
-      required this.lightValue,
-      required this.stateValue});
+      required this.lightLevel,
+      required this.stateValue,
+      required this.icon});
 
   factory _$_ScheduleDeviceStateEntity.fromJson(Map<String, dynamic> json) =>
       _$_$_ScheduleDeviceStateEntityFromJson(json);
@@ -167,13 +183,15 @@ class _$_ScheduleDeviceStateEntity implements _ScheduleDeviceStateEntity {
   @override
   final int device;
   @override
-  final int lightValue;
+  final int lightLevel;
   @override
   final double stateValue;
+  @override
+  final int icon;
 
   @override
   String toString() {
-    return 'ScheduleDeviceStateEntity(state: $state, device: $device, lightValue: $lightValue, stateValue: $stateValue)';
+    return 'ScheduleDeviceStateEntity(state: $state, device: $device, lightLevel: $lightLevel, stateValue: $stateValue, icon: $icon)';
   }
 
   @override
@@ -184,12 +202,14 @@ class _$_ScheduleDeviceStateEntity implements _ScheduleDeviceStateEntity {
                 const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.device, device) ||
                 const DeepCollectionEquality().equals(other.device, device)) &&
-            (identical(other.lightValue, lightValue) ||
+            (identical(other.lightLevel, lightLevel) ||
                 const DeepCollectionEquality()
-                    .equals(other.lightValue, lightValue)) &&
+                    .equals(other.lightLevel, lightLevel)) &&
             (identical(other.stateValue, stateValue) ||
                 const DeepCollectionEquality()
-                    .equals(other.stateValue, stateValue)));
+                    .equals(other.stateValue, stateValue)) &&
+            (identical(other.icon, icon) ||
+                const DeepCollectionEquality().equals(other.icon, icon)));
   }
 
   @override
@@ -197,8 +217,9 @@ class _$_ScheduleDeviceStateEntity implements _ScheduleDeviceStateEntity {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(device) ^
-      const DeepCollectionEquality().hash(lightValue) ^
-      const DeepCollectionEquality().hash(stateValue);
+      const DeepCollectionEquality().hash(lightLevel) ^
+      const DeepCollectionEquality().hash(stateValue) ^
+      const DeepCollectionEquality().hash(icon);
 
   @JsonKey(ignore: true)
   @override
@@ -217,8 +238,9 @@ abstract class _ScheduleDeviceStateEntity implements ScheduleDeviceStateEntity {
   factory _ScheduleDeviceStateEntity(
       {required bool state,
       required int device,
-      required int lightValue,
-      required double stateValue}) = _$_ScheduleDeviceStateEntity;
+      required int lightLevel,
+      required double stateValue,
+      required int icon}) = _$_ScheduleDeviceStateEntity;
 
   factory _ScheduleDeviceStateEntity.fromJson(Map<String, dynamic> json) =
       _$_ScheduleDeviceStateEntity.fromJson;
@@ -228,9 +250,11 @@ abstract class _ScheduleDeviceStateEntity implements ScheduleDeviceStateEntity {
   @override
   int get device => throw _privateConstructorUsedError;
   @override
-  int get lightValue => throw _privateConstructorUsedError;
+  int get lightLevel => throw _privateConstructorUsedError;
   @override
   double get stateValue => throw _privateConstructorUsedError;
+  @override
+  int get icon => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ScheduleDeviceStateEntityCopyWith<_ScheduleDeviceStateEntity>

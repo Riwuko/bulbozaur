@@ -54,16 +54,17 @@ class CreateScheduleCubit extends BaseCubit<CreateScheduleState> {
   ) async {
     final List<ScheduleDeviceStateEntity> device = devices
         .map((e) => ScheduleDeviceStateEntity(
-              state: e.isTurnOn,
-              device: int.parse(e.id),
-              lightValue: 1,
-              stateValue: e.brightness,
-            ))
+            state: e.isTurnOn,
+            device: int.parse(e.id),
+            lightLevel: 1,
+            stateValue: e.brightness,
+            icon: idIcon))
         .toList();
 
     var params = Params(idIcon, device, from, to, name, 1);
     final result = await _createSchedule(params);
-    print(result);
+    result.fold((l) => emit(CreateScheduleState.failure()),
+        (r) => emit(CreateScheduleState.success()));
   }
 }
 

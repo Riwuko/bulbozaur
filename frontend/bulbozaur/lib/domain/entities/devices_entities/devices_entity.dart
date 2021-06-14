@@ -8,6 +8,8 @@ class DeviceEntity with _$DeviceEntity {
   factory DeviceEntity({
     required String name,
     required String id,
+    required String stateValue,
+    required bool state,
     //  @JsonKey(name: '__typename') required String type
   }) = _DeviceEntity;
   factory DeviceEntity.fromJson(Map<String, dynamic> json) =>

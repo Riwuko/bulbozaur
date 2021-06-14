@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b2ebcb3-2cb8-4ee5-bf99-8c3582958cec" name="Default Changelist" comment="" />
+    <list default="true" id="6b2ebcb3-2cb8-4ee5-bf99-8c3582958cec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthome/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/smarthome/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthome/migrations/0003_auto_20210611_1658.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthome/migrations/0004_auto_20210611_1700.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthome/migrations/0005_scheduledevicestate_light_level.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthome/migrations/0006_schedule_is_active.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/bulbozaur/lib/core/app/router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/bulbozaur/lib/core/app/router.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/bulbozaur/lib/core/app/router.gr.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/bulbozaur/lib/core/app/router.gr.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/bulbozaur/lib/core/injection/injection.config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/bulbozaur/lib/core/injection/injection.config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/bulbozaur/lib/presentation/create_schedule/page/create_schedule_page_two.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/bulbozaur/lib/presentation/create_schedule/page/create_schedule_page_two.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/bulbozaur/lib/presentation/login/cubit/login_cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/bulbozaur/lib/presentation/login/cubit/login_cubit.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/bulbozaur/lib/presentation/login/cubit/login_cubit.freezed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/bulbozaur/lib/presentation/login/cubit/login_cubit.freezed.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/bulbozaur/lib/presentation/login/cubit/login_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/bulbozaur/lib/presentation/login/cubit/login_state.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

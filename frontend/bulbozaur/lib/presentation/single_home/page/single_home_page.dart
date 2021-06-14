@@ -181,7 +181,7 @@ class _BodyState extends State<_Body> {
                                     devices[index].brightness = value;
                                   });
                                   _didChangeDevice(context, devices, schedule,
-                                      devices[index].id, idOfHouse);
+                                      index.toString(), idOfHouse);
                                 },
                               ),
                             ))
@@ -254,7 +254,8 @@ class _BodyState extends State<_Body> {
                           children: [
                             Container(
                               margin: const EdgeInsets.only(right: 40.0),
-                              child: Icon(_selectIcon(schedule[index].icon)),
+                              child: Icon(
+                                  _selectIcon(int.parse(schedule[index].id))),
                             ),
                             Text('${schedule[index].name}'),
                           ],
@@ -378,7 +379,7 @@ class _BodyState extends State<_Body> {
       MediaQuery.of(context).size.width * 0.8;
 
   double _theWidthOfListView(BuildContext context, int index) {
-    if (index > 5) {
+    if (index > 4) {
       return MediaQuery.of(context).size.width * 0.8;
     } else {
       return MediaQuery.of(context).size.width * 0.3 * index;

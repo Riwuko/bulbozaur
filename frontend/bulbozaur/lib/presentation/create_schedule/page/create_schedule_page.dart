@@ -19,10 +19,11 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocListener<CreateScheduleCubit, CreateScheduleState>(
           listener: (context, state) => state.maybeWhen(
-                orElse: () => print(""),
-                choosedIcon: (idIcon) => context.navigator
-                    .push(CreateSchedulePageTwoRoute(iconId: idIcon)),
-              ),
+              orElse: () => print(""),
+              choosedIcon: (idIcon) => context.navigator
+                  .push(CreateSchedulePageTwoRoute(iconId: idIcon)),
+              success: () =>
+                  context.navigator.push(SingleHomePageRoute(idOfHouse: 1))),
           child: Scaffold(
               body: Center(
             child: SingleChildScrollView(

@@ -15,4 +15,6 @@ class CreateScheduleState with _$CreateScheduleState {
       required String fromTime,
       required String toTime,
       required List<deviceDisplay> device}) = _CreateScheduleStateChoosedTime;
+
+  const factory CreateScheduleState.success() = _CreateScheduleStateSuccess;
 }

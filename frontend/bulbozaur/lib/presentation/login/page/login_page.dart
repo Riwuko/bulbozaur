@@ -107,7 +107,7 @@ class _BodyState extends State<_Body> {
                           context,
                           _loginTextController.text,
                           _passwordTextController.text),
-                      child: Text("Sign Up"),
+                      child: Text("Sign In"),
                       style: ButtonStyles.loginPageButton),
                 ),
                 Container(

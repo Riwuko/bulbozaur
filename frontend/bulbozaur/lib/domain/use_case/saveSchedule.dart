@@ -10,9 +10,9 @@ import 'package:project_skeleton/presentation/create_schedule/cubit/create_sched
 @Injectable()
 class CreateSchedule implements UseCase<bool, Params> {
   static const String getLogin = r"""
-mutation Mutacja ($name: String!,$buildingId: ID!,$timeFrom:Time!,$timeTo:Time!,$deviceStates:[ScheduleDeviceStateInput!]!
+mutation Mutacja ($icon:Int!,$name: String!,$buildingId: ID!,$timeFrom:Time!,$timeTo:Time!,$devicesStates:[ScheduleDeviceStateInput!]!
 ,$token:String!){
-  createSchedule(name:$name,buildingId:$buildingId,timeFrom:$timeFrom,timeTo:$timeTo,token:$token,devicesStates:$deviceStates){
+  createSchedule(name:$name,buildingId:$buildingId,timeFrom:$timeFrom,timeTo:$timeTo,token:$token,devicesStates:$devicesStates,icon:$icon){
     schedule{
       name
     }
@@ -30,6 +30,7 @@ mutation Mutacja ($name: String!,$buildingId: ID!,$timeFrom:Time!,$timeTo:Time!,
     final QueryOptions options = QueryOptions(
       document: gql(getLogin),
       variables: <String, dynamic>{
+        'icon': params.idIcon,
         'token': token,
         'name': params.name,
         'buildingId': params.buildingId,

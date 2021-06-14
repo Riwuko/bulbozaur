@@ -16,7 +16,6 @@ class LoginCubit extends BaseCubit<LoginState> {
   @override
   Future<void> init() async {}
 
-<<<<<<< HEAD
   Future<void> didTapContinueButton(String login, String password) async {
     var responses = false;
     (await _checkIfLoginIsGood(login, password)).fold(
@@ -30,7 +29,4 @@ class LoginCubit extends BaseCubit<LoginState> {
     }
     //   emit(LoginState.loginSuccess());
   }
-=======
-  Future<void> didTapContinueButton(String login, String password) async {}
->>>>>>> main
 }

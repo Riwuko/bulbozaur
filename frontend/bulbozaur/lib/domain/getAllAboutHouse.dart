@@ -17,6 +17,8 @@ query actuatingDevices($token:String!,$id:Int!)
 actuatingDevices(building_Id:$id,token:$token){
   id
   name
+  state
+  stateValue
 }
 }
  """;

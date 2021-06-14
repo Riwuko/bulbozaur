@@ -25,7 +25,7 @@ class SingleHomeCubit extends BaseCubit<SingleHomeState> {
   Future<void> init() async {}
 
   Future<void> start(int id) async {
-    mqtt = MqttSendingSignal("user", "192.168.0.106", 1883, "test1",
+    mqtt = MqttSendingSignal("user", "192.168.100.123", 1883, "test1",
         "shellies/ShellyBulbDuo-8CAAB55F6265/light/0/set");
     await mqtt.contactMQTT();
     var schedules;
@@ -63,9 +63,9 @@ List<deviceDisplay> changeType(List<DeviceEntity> devices) {
       .map((e) => deviceDisplay(
           id: e.id,
           name: e.name,
-          brightness: 0.0,
+          brightness: double.parse(e.stateValue),
           isExpanded: false,
-          isTurnOn: false))
+          isTurnOn: e.state))
       .toList();
   return displaying;
 }

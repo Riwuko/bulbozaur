@@ -11,8 +11,9 @@ _$_ScheduleDeviceStateEntity _$_$_ScheduleDeviceStateEntityFromJson(
   return _$_ScheduleDeviceStateEntity(
     state: json['state'] as bool,
     device: json['device'] as int,
-    lightValue: json['lightValue'] as int,
+    lightLevel: json['lightLevel'] as int,
     stateValue: (json['stateValue'] as num).toDouble(),
+    icon: json['icon'] as int,
   );
 }
 
@@ -21,6 +22,7 @@ Map<String, dynamic> _$_$_ScheduleDeviceStateEntityToJson(
     <String, dynamic>{
       'state': instance.state,
       'device': instance.device,
-      'lightValue': instance.lightValue,
+      'lightLevel': instance.lightLevel,
       'stateValue': instance.stateValue,
+      'icon': instance.icon,
     };
