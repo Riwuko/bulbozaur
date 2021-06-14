@@ -2,7 +2,6 @@ import graphene
 from graphene import Node
 
 from django.shortcuts import get_object_or_404
-from django_filters import OrderingFilter
 from graphene_django import DjangoObjectType
 from graphql_jwt.decorators import login_required
 from graphene_elastic import (
@@ -30,7 +29,6 @@ class MeasurementCreateType(DjangoObjectType):
     class Meta:
         model = Measurement
 
-
 class MeasurementType(ElasticsearchObjectType):
     class Meta:
         document = MeasurementDocument
@@ -44,6 +42,7 @@ class MeasurementType(ElasticsearchObjectType):
         filter_fields = {
             'id': 'id',
             'measure_parameter': 'measure_parameter',
+            'measure_date': 'measure_date',
             'device':{
                 'type': 'object',
                 'properties': {
@@ -79,6 +78,7 @@ class MeasurementObjectType(graphene.ObjectType):
     id = graphene.ID()
     measure_value = graphene.Decimal()
     measure_date = graphene.DateTime()
+    measure_parameter = graphene.String()
 
 class ScheduleDeviceStateType(DjangoObjectType):
     class Meta:
@@ -157,6 +157,8 @@ class Query(graphene.ObjectType):
     devices = graphene.List(DeviceUnionType,  building__id=graphene.Int(required=False), token=graphene.String(required=True))
     device = graphene.Field(DeviceUnionType, id=graphene.Int(), token=graphene.String(required=True))
 
+    measure_parameters = graphene.List(graphene.String, building__id=graphene.Int(required=False), token=graphene.String(required=True))
+
     measurements = ElasticsearchConnectionField(MeasurementType)
 
     measuring_devices = graphene.List(MeasuringDeviceType, building__id=graphene.Int(required=False), token=graphene.String(required=True))
@@ -173,6 +175,16 @@ class Query(graphene.ObjectType):
 
     users = graphene.List(UserType, token=graphene.String(required=True))
     user = graphene.Field(UserType, id=graphene.Int(), token=graphene.String(required=True))
+
+    @login_required
+    def resolve_measure_parameters(root, info, **kwargs):
+        building = kwargs.get("building__id")
+        if building:
+            distincts = Measurement.objects.filter(device__building__user=info.context.user, device__building__id = building).order_by().values_list('measure_parameter').distinct()
+        else:
+            distincts = Measurement.objects.filter(device__building__user=info.context.user).order_by().values_list('measure_parameter').distinct()
+        distincts = (list(sum(distincts, ())))
+        return distincts
 
     @login_required
     def resolve_buildings(root, info, **kwargs):
