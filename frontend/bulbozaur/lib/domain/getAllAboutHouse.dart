@@ -19,6 +19,7 @@ actuatingDevices(building_Id:$id,token:$token){
   name
   state
   stateValue
+  lightLevel
 }
 }
  """;

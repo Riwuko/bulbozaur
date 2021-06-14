@@ -11,6 +11,7 @@ import 'package:project_skeleton/core/injection/injection.dart';
 import 'package:project_skeleton/core/presentation/styles/styles.dart';
 import 'package:project_skeleton/core/presentation/values/values.dart';
 import 'package:project_skeleton/domain/entities/deviceDisplay/device_display.dart';
+import 'package:project_skeleton/domain/entities/measurement_entity.dart';
 import 'package:project_skeleton/domain/entities/schedule_entites/schedule_entity.dart';
 import 'package:project_skeleton/presentation/single_home/cubit/single_home_cubit.dart';
 
@@ -51,13 +52,19 @@ class _BodyState extends State<_Body> {
       BlocConsumer<SingleHomeCubit, SingleHomeState>(
         buildWhen: (p, c) => c is Displaying,
         builder: (context, state) => state.maybeWhen(
-          orElse: () => Container(),
-          startDisplaying: (devices, schedule) => PageView(
+          orElse: () => Container(
+            color: Colors.blue,
+            child: Text("Stan nie przeszedl "),
+          ),
+          failure: () =>
+              Container(child: Text("It was problem with download data")),
+          startDisplaying: (devices, schedule, measure) => PageView(
             scrollDirection: Axis.horizontal,
             controller: controller,
             children: [
-              _singleHomeFirstPage(context, manualControl, devices, schedule),
-              _statisticsHome(context),
+              _singleHomeFirstPage(
+                  context, manualControl, devices, schedule, measure),
+              _statisticsHome(context, measure),
               _controlSchedule(context, schedule),
               _settingsHome(context)
             ],
@@ -72,8 +79,12 @@ class _BodyState extends State<_Body> {
             orElse: () => Container()),
       );
 
-  Widget _singleHomeFirstPage(BuildContext context, bool manualControl,
-      List<deviceDisplay> devices, List<ScheduleEntity> schedule) {
+  Widget _singleHomeFirstPage(
+      BuildContext context,
+      bool manualControl,
+      List<deviceDisplay> devices,
+      List<ScheduleEntity> schedule,
+      List<List<MeasurementEntity>> measure) {
     double _currentSlide = 0;
 
     return Scaffold(
@@ -111,7 +122,7 @@ class _BodyState extends State<_Body> {
                         });
                         print(devices[index].isExpanded);
                         _didChangeDevice(context, devices, schedule,
-                            devices[index].id, idOfHouse);
+                            devices[index].id, idOfHouse, measure);
                       },
                       children: [
                         ExpansionPanel(
@@ -145,12 +156,13 @@ class _BodyState extends State<_Body> {
                                               devices[index].isTurnOn = value;
                                             }
                                           });
-                                          _didChangeDevice(
+                                          _didChangeIfBulbTurnOn(
                                               context,
                                               devices,
                                               schedule,
                                               devices[index].id,
-                                              idOfHouse);
+                                              idOfHouse,
+                                              measure);
                                         },
                                       ),
                                       margin: const EdgeInsets.only(
@@ -159,32 +171,66 @@ class _BodyState extends State<_Body> {
                                   ],
                                 ),
                             isExpanded: devices[index].isExpanded,
-                            body: SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: Colors.blue,
-                                inactiveTrackColor: Colors.blue[100],
-                                trackShape: RectangularSliderTrackShape(),
-                                trackHeight: 4.0,
-                                thumbColor: Colors.blueGrey,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 12.0),
-                                overlayColor: Colors.red.withAlpha(32),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 28.0),
+                            body: Column(children: [
+                              Text("The bulb value"),
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: Colors.blue,
+                                  inactiveTrackColor: Colors.blue[100],
+                                  trackShape: RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: Colors.blueGrey,
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 12.0),
+                                  overlayColor: Colors.red.withAlpha(32),
+                                  overlayShape: RoundSliderOverlayShape(
+                                      overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  min: 0.0,
+                                  max: 100.0,
+                                  value: devices[index].brightness,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (devices[index].isTurnOn) {
+                                        devices[index].brightness = value;
+                                      }
+                                    });
+                                    _didChangeDevice(context, devices, schedule,
+                                        index.toString(), idOfHouse, measure);
+                                  },
+                                ),
                               ),
-                              child: Slider(
-                                min: 0.0,
-                                max: 100.0,
-                                value: devices[index].brightness,
-                                onChanged: (value) {
-                                  setState(() {
-                                    devices[index].brightness = value;
-                                  });
-                                  _didChangeDevice(context, devices, schedule,
-                                      index.toString(), idOfHouse);
-                                },
-                              ),
-                            ))
+                              Text("The white value:"),
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: Colors.grey,
+                                  inactiveTrackColor: Colors.grey,
+                                  trackShape: RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: Colors.black,
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 12.0),
+                                  overlayColor: Colors.red.withAlpha(32),
+                                  overlayShape: RoundSliderOverlayShape(
+                                      overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  min: 0.0,
+                                  max: 100.0,
+                                  value: devices[index].whiteColor.toDouble(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      if (devices[index].isTurnOn) {
+                                        devices[index].whiteColor = value;
+                                      }
+                                    });
+                                    _didChangeDevice(context, devices, schedule,
+                                        index.toString(), idOfHouse, measure);
+                                  },
+                                ),
+                              )
+                            ]))
                       ],
                     )),
           ),
@@ -194,7 +240,29 @@ class _BodyState extends State<_Body> {
     );
   }
 
-  Widget _statisticsHome(BuildContext context) {
+//  List<Feature> features = [
+//     Feature(
+//       title: "Drink Water",
+//       color: Colors.blue,
+//       data: [0.2, 0.8, 0.4, 0.7, 0.6],
+//     ),
+  Widget _statisticsHome(
+      BuildContext context, List<List<MeasurementEntity>> measure) {
+    List<Feature> features = [
+      Feature(
+          data: measure[0].map((e) => e.measureValue).toList(),
+          color: Colors.yellow,
+          title: "Light Level"),
+      Feature(
+          data: measure[1].map((e) => e.measureValue).toList(),
+          color: Colors.blue,
+          title: "Light Intensity"),
+      Feature(
+          data: measure[2].map((e) => e.measureValue).toList(),
+          color: Colors.red,
+          title: "Device action"),
+    ];
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -209,9 +277,9 @@ class _BodyState extends State<_Body> {
           ),
           LineGraph(
             features: features,
-            labelX: ['Day 1 ', 'Day 2', 'Day 3', 'Day 4'],
-            labelY: ['20%', '40%', '60%', '80%', '100%'],
             showDescription: true,
+            labelY: measure[0].map((e) => e.measureValue.toString()).toList(),
+            labelX: measure[0].map((e) => e.measureDate.toString()).toList(),
             graphColor: Colors.black,
             graphOpacity: 0.4,
             verticalFeatureDirection: true,
@@ -338,34 +406,6 @@ class _BodyState extends State<_Body> {
     );
   }
 
-  List<Feature> features = [
-    Feature(
-      title: "Drink Water",
-      color: Colors.blue,
-      data: [0.2, 0.8, 0.4, 0.7, 0.6],
-    ),
-    Feature(
-      title: "Exercise",
-      color: Colors.pink,
-      data: [1, 0.8, 0.6, 0.7, 0.3],
-    ),
-    Feature(
-      title: "Study",
-      color: Colors.cyan,
-      data: [0.5, 0.4, 0.85, 0.4, 0.7],
-    ),
-    Feature(
-      title: "Water Plants",
-      color: Colors.green,
-      data: [0.6, 0.2, 0, 0.1, 1],
-    ),
-    Feature(
-      title: "Grocery Shopping",
-      color: Colors.amber,
-      data: [0.25, 1, 0.3, 0.8, 0.6],
-    ),
-  ];
-
   Widget _singleCircle(bool isActive) => Container(
         width: 40,
         height: 40,
@@ -405,17 +445,61 @@ class _BodyState extends State<_Body> {
     }
   }
 
+  List<Feature> features = [
+    Feature(
+      title: "Drink Water",
+      color: Colors.blue,
+      data: [0.2, 0.8, 0.4, 0.7, 0.6],
+    ),
+    Feature(
+      title: "Exercise",
+      color: Colors.pink,
+      data: [1, 0.8, 0.6, 0.7, 0.3],
+    ),
+    Feature(
+      title: "Study",
+      color: Colors.cyan,
+      data: [0.5, 0.4, 0.85, 0.4, 0.7],
+    ),
+    Feature(
+      title: "Water Plants",
+      color: Colors.green,
+      data: [0.6, 0.2, 0, 0.1, 1],
+    ),
+    Feature(
+      title: "Grocery Shopping",
+      color: Colors.amber,
+      data: [0.25, 1, 0.3, 0.8, 0.6],
+    ),
+  ];
+
   void _didChangeManualControl(
           BuildContext context, bool isTrue, int buildingId) =>
       context
           .read<SingleHomeCubit>()
           .didChangeManualControl(isTrue, buildingId);
 
-  void _didChangeDevice(BuildContext context, List<deviceDisplay> devices,
-          List<ScheduleEntity> schedule, String idDevices, int idHome) =>
+  void _didChangeDevice(
+          BuildContext context,
+          List<deviceDisplay> devices,
+          List<ScheduleEntity> schedule,
+          String idDevices,
+          int idHome,
+          List<List<MeasurementEntity>> measure) =>
       context
           .read<SingleHomeCubit>()
-          .didChangeDevice(devices, schedule, idDevices, idHome);
+          .didChangeDevice(devices, schedule, idDevices, idHome, measure);
+
+  void _didChangeIfBulbTurnOn(
+          BuildContext context,
+          List<deviceDisplay> devices,
+          List<ScheduleEntity> schedule,
+          String idDevices,
+          int idHome,
+          List<List<MeasurementEntity>> measure) =>
+      context
+          .read<SingleHomeCubit>()
+          .didChangeIfBulbTurnOn(devices, schedule, idDevices, idHome, measure);
 
   void _createControlSchedule(BuildContext context) =>
       context.read<SingleHomeCubit>().createControlSchedule();

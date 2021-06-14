@@ -4,6 +4,7 @@ class deviceDisplay {
   String id;
   String name;
   double brightness;
+  double whiteColor;
   bool isTurnOn;
   bool isExpanded;
 
@@ -11,6 +12,7 @@ class deviceDisplay {
       {required this.id,
       required this.name,
       required this.brightness,
+      required this.whiteColor,
       required this.isExpanded,
       required this.isTurnOn});
 
@@ -18,6 +20,7 @@ class deviceDisplay {
       id: device.id,
       name: device.name,
       brightness: 0.0,
+      whiteColor: 0,
       isExpanded: false,
       isTurnOn: false);
 }

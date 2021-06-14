@@ -30,10 +30,12 @@ class _$SingleHomeStateTearOff {
 
   _SingleHomeStateStartDisplaying startDisplaying(
       {required List<deviceDisplay> device,
-      required List<ScheduleEntity> schedules}) {
+      required List<ScheduleEntity> schedules,
+      required List<List<MeasurementEntity>> measure}) {
     return _SingleHomeStateStartDisplaying(
       device: device,
       schedules: schedules,
+      measure: measure,
     );
   }
 
@@ -53,7 +55,9 @@ mixin _$SingleHomeState {
     required TResult Function() failure,
     required TResult Function() createSchedule,
     required TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+            List<deviceDisplay> device,
+            List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)
         startDisplaying,
     required TResult Function() cleanState,
   }) =>
@@ -63,8 +67,8 @@ mixin _$SingleHomeState {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
-    TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+    TResult Function(List<deviceDisplay> device, List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)?
         startDisplaying,
     TResult Function()? cleanState,
     required TResult orElse(),
@@ -153,7 +157,9 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
     required TResult Function() failure,
     required TResult Function() createSchedule,
     required TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+            List<deviceDisplay> device,
+            List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)
         startDisplaying,
     required TResult Function() cleanState,
   }) {
@@ -166,8 +172,8 @@ class _$_SingleHomeInitial implements _SingleHomeInitial {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
-    TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+    TResult Function(List<deviceDisplay> device, List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)?
         startDisplaying,
     TResult Function()? cleanState,
     required TResult orElse(),
@@ -233,6 +239,7 @@ class __$SingleHomeFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
+@Implements(Displaying)
 class _$_SingleHomeFailure implements _SingleHomeFailure {
   const _$_SingleHomeFailure();
 
@@ -256,7 +263,9 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
     required TResult Function() failure,
     required TResult Function() createSchedule,
     required TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+            List<deviceDisplay> device,
+            List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)
         startDisplaying,
     required TResult Function() cleanState,
   }) {
@@ -269,8 +278,8 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
-    TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+    TResult Function(List<deviceDisplay> device, List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)?
         startDisplaying,
     TResult Function()? cleanState,
     required TResult orElse(),
@@ -311,7 +320,7 @@ class _$_SingleHomeFailure implements _SingleHomeFailure {
   }
 }
 
-abstract class _SingleHomeFailure implements SingleHomeState {
+abstract class _SingleHomeFailure implements SingleHomeState, Displaying {
   const factory _SingleHomeFailure() = _$_SingleHomeFailure;
 }
 
@@ -360,7 +369,9 @@ class _$_SingleHomeCreateSchedule implements _SingleHomeCreateSchedule {
     required TResult Function() failure,
     required TResult Function() createSchedule,
     required TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+            List<deviceDisplay> device,
+            List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)
         startDisplaying,
     required TResult Function() cleanState,
   }) {
@@ -373,8 +384,8 @@ class _$_SingleHomeCreateSchedule implements _SingleHomeCreateSchedule {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
-    TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+    TResult Function(List<deviceDisplay> device, List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)?
         startDisplaying,
     TResult Function()? cleanState,
     required TResult orElse(),
@@ -425,7 +436,10 @@ abstract class _$SingleHomeStateStartDisplayingCopyWith<$Res> {
           _SingleHomeStateStartDisplaying value,
           $Res Function(_SingleHomeStateStartDisplaying) then) =
       __$SingleHomeStateStartDisplayingCopyWithImpl<$Res>;
-  $Res call({List<deviceDisplay> device, List<ScheduleEntity> schedules});
+  $Res call(
+      {List<deviceDisplay> device,
+      List<ScheduleEntity> schedules,
+      List<List<MeasurementEntity>> measure});
 }
 
 /// @nodoc
@@ -445,6 +459,7 @@ class __$SingleHomeStateStartDisplayingCopyWithImpl<$Res>
   $Res call({
     Object? device = freezed,
     Object? schedules = freezed,
+    Object? measure = freezed,
   }) {
     return _then(_SingleHomeStateStartDisplaying(
       device: device == freezed
@@ -455,6 +470,10 @@ class __$SingleHomeStateStartDisplayingCopyWithImpl<$Res>
           ? _value.schedules
           : schedules // ignore: cast_nullable_to_non_nullable
               as List<ScheduleEntity>,
+      measure: measure == freezed
+          ? _value.measure
+          : measure // ignore: cast_nullable_to_non_nullable
+              as List<List<MeasurementEntity>>,
     ));
   }
 }
@@ -465,16 +484,18 @@ class __$SingleHomeStateStartDisplayingCopyWithImpl<$Res>
 class _$_SingleHomeStateStartDisplaying
     implements _SingleHomeStateStartDisplaying {
   const _$_SingleHomeStateStartDisplaying(
-      {required this.device, required this.schedules});
+      {required this.device, required this.schedules, required this.measure});
 
   @override
   final List<deviceDisplay> device;
   @override
   final List<ScheduleEntity> schedules;
+  @override
+  final List<List<MeasurementEntity>> measure;
 
   @override
   String toString() {
-    return 'SingleHomeState.startDisplaying(device: $device, schedules: $schedules)';
+    return 'SingleHomeState.startDisplaying(device: $device, schedules: $schedules, measure: $measure)';
   }
 
   @override
@@ -485,14 +506,17 @@ class _$_SingleHomeStateStartDisplaying
                 const DeepCollectionEquality().equals(other.device, device)) &&
             (identical(other.schedules, schedules) ||
                 const DeepCollectionEquality()
-                    .equals(other.schedules, schedules)));
+                    .equals(other.schedules, schedules)) &&
+            (identical(other.measure, measure) ||
+                const DeepCollectionEquality().equals(other.measure, measure)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(device) ^
-      const DeepCollectionEquality().hash(schedules);
+      const DeepCollectionEquality().hash(schedules) ^
+      const DeepCollectionEquality().hash(measure);
 
   @JsonKey(ignore: true)
   @override
@@ -507,11 +531,13 @@ class _$_SingleHomeStateStartDisplaying
     required TResult Function() failure,
     required TResult Function() createSchedule,
     required TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+            List<deviceDisplay> device,
+            List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)
         startDisplaying,
     required TResult Function() cleanState,
   }) {
-    return startDisplaying(device, schedules);
+    return startDisplaying(device, schedules, measure);
   }
 
   @override
@@ -520,14 +546,14 @@ class _$_SingleHomeStateStartDisplaying
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
-    TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+    TResult Function(List<deviceDisplay> device, List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)?
         startDisplaying,
     TResult Function()? cleanState,
     required TResult orElse(),
   }) {
     if (startDisplaying != null) {
-      return startDisplaying(device, schedules);
+      return startDisplaying(device, schedules, measure);
     }
     return orElse();
   }
@@ -566,11 +592,14 @@ abstract class _SingleHomeStateStartDisplaying
     implements SingleHomeState, Displaying {
   const factory _SingleHomeStateStartDisplaying(
           {required List<deviceDisplay> device,
-          required List<ScheduleEntity> schedules}) =
+          required List<ScheduleEntity> schedules,
+          required List<List<MeasurementEntity>> measure}) =
       _$_SingleHomeStateStartDisplaying;
 
   List<deviceDisplay> get device => throw _privateConstructorUsedError;
   List<ScheduleEntity> get schedules => throw _privateConstructorUsedError;
+  List<List<MeasurementEntity>> get measure =>
+      throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$SingleHomeStateStartDisplayingCopyWith<_SingleHomeStateStartDisplaying>
       get copyWith => throw _privateConstructorUsedError;
@@ -621,7 +650,9 @@ class _$_SingleHomeStateCleanState implements _SingleHomeStateCleanState {
     required TResult Function() failure,
     required TResult Function() createSchedule,
     required TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)
+            List<deviceDisplay> device,
+            List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)
         startDisplaying,
     required TResult Function() cleanState,
   }) {
@@ -634,8 +665,8 @@ class _$_SingleHomeStateCleanState implements _SingleHomeStateCleanState {
     TResult Function()? initial,
     TResult Function()? failure,
     TResult Function()? createSchedule,
-    TResult Function(
-            List<deviceDisplay> device, List<ScheduleEntity> schedules)?
+    TResult Function(List<deviceDisplay> device, List<ScheduleEntity> schedules,
+            List<List<MeasurementEntity>> measure)?
         startDisplaying,
     TResult Function()? cleanState,
     required TResult orElse(),

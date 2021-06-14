@@ -39,7 +39,7 @@ class MqttSendingSignal {
       String mode, int buildingId, int idLight) async {
     /// int array
     Uint8Buffer uint8buffer = Uint8Buffer();
-    publishTopic = "bulb/mode";
+    var publishTopic = "bulb/mode";
     var result = changeMode(mode, buildingId, idLight);
     var msg1 = result.toJson();
     var msg = json.encode(msg1);
@@ -54,7 +54,7 @@ class MqttSendingSignal {
       double stateValue, double lightValue, int bulbId) async {
     /// int array
     Uint8Buffer uint8buffer = Uint8Buffer();
-    publishTopic = "bulb/mode";
+    var publishTopic = "bulb/parameters";
     var result = message(state, lightValue, stateValue, buildingId, bulbId);
     var msg1 = result.toJson();
     var msg = json.encode(msg1);
@@ -110,8 +110,8 @@ class MqttSendingSignal {
         .withWillQos(MqttQos.atLeastOnce);
     mqttClient.connectionMessage = connMessage;
     try {
-      mqttClient.connect();
-    } catch (e) {
+      await mqttClient.connect();
+    } on Exception catch (e) {
       print('Exception: $e');
       mqttClient.disconnect();
     }

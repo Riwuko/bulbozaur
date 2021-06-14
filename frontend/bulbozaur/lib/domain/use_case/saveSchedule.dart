@@ -18,7 +18,6 @@ mutation Mutacja ($icon:Int!,$name: String!,$buildingId: ID!,$timeFrom:Time!,$ti
     }
   }
 }
-
  """;
 
   @override

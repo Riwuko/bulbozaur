@@ -10,7 +10,7 @@ import 'package:project_skeleton/domain/use_case/graphQl_get_client.dart';
 import 'package:project_skeleton/domain/use_case/core/usecase.dart';
 
 @Injectable()
-class GetSchedule extends UseCase<List<ScheduleEntity>, void> {
+class GetSchedule extends UseCase<List<ScheduleEntity>, int> {
   static const String getDevices = r"""
 query schedules($token:String!,$id:Int!)
 {
@@ -36,8 +36,7 @@ schedules(building_Id:$id,token:$token){
  """;
 
   @override
-  Future<Either<Failure, List<ScheduleEntity>>> call([noParams]) async {
-    int id = 1;
+  Future<Either<Failure, List<ScheduleEntity>>> call(int id) async {
     final storage = new FlutterSecureStorage();
     String? token = await storage.read(key: "token");
     final QueryOptions options = QueryOptions(
